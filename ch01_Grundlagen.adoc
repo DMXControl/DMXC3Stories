@@ -1,0 +1,144 @@
+= **Kapitel 1: Alles fängt bei den Grundlagen an** 
+
+Auch wenn wir im Zeitalter der KI sind – die Beleuchtung einer Show (egal wie groß oder klein) macht sich immer noch nicht von allein und man muss schon einige Grundlagen beherrschen. Hier gibt Stefan einen ersten Überblick zum Verständnis der Basics, vertiefende Details findet man wie üblich im Wiki und in späteren Kapiteln. 
+
+== Einige Begriffe – kennst Du alle?
+
+Jannik kennt sich ja bereits mit der DMX-Steuerung mit einem Pult aus. Viele der dort verwendeten Begriffe findet er auch in der Software DMXControl3 wieder. Auch wenn man normalerweise in jedem Buch das Abkürzungsverzeichnis und die Begriffserklärung überspringt, solltest Du hier bei unbekannten Begriffen eine Ausnahme machen. Hier wird sozusagen die Grundlage des Verständnisses der weiteren Kapitel gelegt, aber später wird alles noch mal ausführlich erklärt. Ein Experte würde vielleicht manchmal an unseren Erklärungen rummäkeln, aber Stefan versucht es mit sehr einfachen und verständlichen Worten zum Einstieg.
+
+
+.Grundbegriffe
+[width="100%",options="header,footer"]
+[%autowidth.stretch]
+|====================
+| Begriff  |  Erklärung 
+| *HAL*
+
+Hardware 
+
+Abstraction Layer
+ |DMXControl3 denkt nur in Eigenschaften/Attributen der Lampe wie Farbe, Helligkeit, Position (bestehend aus Pan, Tilt) usw.. Wir werden nun immer von Eigenschaften der Geräte sprechen. Konkrete DMX-Werte zur Ansteuerung sollen den Nutzer nicht interessieren, d.h. DMXControl3 übersetzt automatisch z.B. die Farbe „rot“ in einen DMX-Wert, der an die Lampe gesendet wird. Um dieses tun zu können wird für jedes Gerät ein DDF benötigt.
+ 
+*Wiki:* Hardware Abstraction Layer (HAL)
+
+| *DDF* 
+
+Device 
+
+Definition File
+ |  Damit DMXControl3 die HAL implementieren kann, benötigt es die Information, welcher DMX-Wert auf welchem Kanal eine entsprechende Reaktion erzeugt. Im Prinzip wird hierbei die DMX-Belegungstabelle aus der Bedienungsanleitung des Gerätes in einem XML-Beschreibungsformat abgebildet. Damit nicht jeder Nutzer für seine Geräte die DDFs selbst erstellen muss, werden viele DDFs für Hunderte Lampentypen über die Community von DMXControl bereitgestellt. Man kann Geräte in DMXControl3 nur komfortabel verwenden, wenn ein entsprechendes DDF verfügbar ist.
+
+*Wiki:* DDF-Einführung DMXC3
+
+| Cue und 
+
+Cueliste
+ |  Deutsch Cue: Szene/Lichtstimmung. Der Begriff kommt ursprünglich aus dem Theater und bedeutet, dass auf ein „Schlagwort“ eine neue Szene beginnt. Das wurde auf das Licht übertragen, zumal die neue Szene meistens wirklich mit einer neuen Lichtstimmung verbunden ist. Cues müssen nicht immer statisch sein, sondern können auch dynamische Effekte enthalten, wie Du sie vielleicht bei schwenkenden Movingheads schon gesehen hast. Die einzelnen Positionen der Scheinwerfer müssen dabei nicht einzelne Cues sein (könnten es aber auch).
+ 
+Eine Cueliste enthält eine (Ab-)Folge von Cues, aber wird öfter auch nur eine einzelne Cue enthalten.
+
+*Wiki:* Cuelist DMXC3
+
+| Effekt  |  Einen Effekt kannst Du wie eine vordefinierte Funktion betrachten, die Du in eine Cue einfügen kannst, z.B. ein Lauflicht innerhalb einer Gerätegruppe oder ein sinusartiger Verlauf der Helligkeit oder Position der Lampen in einer Gruppe. Effekte können extrem viel Zeit bei der Programmierung der Show einsparen.
+
+*Wiki:* Effects and Filters DMXC3
+
+| Master  |  Einen Master kann man sich wie einen Slider/Fader auf einem Pult vorstellen, mit dem man etwas (z.B. Helligkeit) zwischen 0 und 100% regelt, aber es gibt auch andere Regelgrößen wie Speed oder Color. Am bekanntesten ist der Grand Master, mit dem man die Helligkeit der Show insgesamt steuern kann. Es gibt aber auch Master für Geschwindigkeit, Farben und vieles andere.
+
+*Wiki:* Master DMXC3
+
+| Executor  | Auch den Begriff Executor kann man wörtlich nehmen: Er „vollsteckt“ bestimmte Aktivitäten. So kann er z.B. Cuelisten starten, pausieren und stoppen, wenn ihm diese vorher zugeordnet wurden. Es kann in einer Show mehrere aktive Executoren geben.
+Ein Executor besteht immer ähnlich zu einem Master aus einem Slider, aber hat standardmäßig noch einige Buttons für spezielle Funktionen (Flash, Start, Go, Stop).
+
+**Wiki: **Executor DMXC3
+ 
+|  Softdesk |  DMXControl3 hat als Software-Produkt eher eine flexible Window-basierte Oberfläche und unterscheidet sich damit erstmal von der Bedienung mit einem DMX-Lichtpult. Um aber ein ähnliches Bediengefühl wie an einem Pult zu erlauben, gibt es die Möglichkeit sich virtuelle Pulte zu basteln. Dort kann man Slider/Fader, Buttons und andere Elemente nach dem eigenen Geschmack platzieren. Solche Softdesks werden auch manchmal erstellt, um einem nicht-affinen bzw. „ungelernten“ Bediener zu ermöglichen, die Show abzufahren. So könnte Jana mit einem speziellen Softdesk ohne Vorkenntnisse das Licht steuern, wobei sie nur einzelne Buttons drücken muss.
+
+**Wiki: **Softdesk DMXC3
+
+| _HTP/LTP_  |    _(wird ergänzt, Wo wird das eingestellt?)_
+
+Wiki: HTP-, LTP- and LoTP-Mixing (Cuelist) DMXC3
+
+| Tracking  |  Eine Show ist immer eine Folge von Cues. Ganz vereinfacht gesagt, regelt man mit dem Tracking ob jede Cue komplett unabhängig ist oder ob der Ablauf der Cues im Vordergrund steht, die vorhergehenden Cues also „Spuren“ (Track) für die folgenden hinterlassen. Bei aktiviertem Tracking in einer Cuelist bleiben alle Werte solange am Ausgang bis sie durch eine neue Cue überschrieben werden.
+
+*Wiki:* Tracking (Cuelist) DMXC3
+
+| Trigger | Mit Triggern wird die Abfolge von Cues in einer Cueliste gesteuert, so kann man z.B. Zeitspannen oder absolute Zeiten als Startpunkt angeben. Es gibt weitere Formen, z.B. kann die nachfolgende Cue gestartet werden, wenn 3 Beats erkannt wurden.
+
+*Wiki:* Cuelist (Options) DMXC3
+
+| RGB/HSV  |  RGB hat jeder schon mal gehört. Das sind die rot-grün-blau Farbanteile für eine Mischfarbe. HSV steht natürlich nicht für „Hamburger Sport Verein“, sondern steht für hue-saturation-value (also Farbwert, Sättigung, Hellwert) und ist ein alternatives Farbmodell das der menschlichen Farbwahrnehmung stärker entspricht. Es gibt da komplexe Umrechnungstheorien. Wir begnügen uns damit, dass wir hiermit besser unsere Farbwahrnehmung für farbige LEDs einstellen können und DMXControl auch dieses Farbmodell unterstützt.
+
+*Wiki:* HSV-Farbraum
+
+| Universe  |  Ein Universe ist ein Strang aus Geräten mit bis zu 512 DMX-Kanälen. Für Theaterscheinwerfer war das seinerzeit eine gigantische Zahl. Mit der Zahl kamen Geräte auf dem Markt, die allein schon 30 oder 50 Kanäle in Anspruch nehmen, so dass irgendwann 1 Universe für alle Lampen nicht mehr ausreichte. DMXControl unterstützt mehrere Universes (siehe erste Ziffer bei der Adressierung der Lampen, z.B. 1.102 oder 3.84). Unser Nodle-Interface dagegen kann nur 1 Universe, so dass man ggf. mehrere DMX-Interfaces benötigt. Aber: Alle Shows, die Jannik bisher gemacht hatte, kamen immer mit einem Universe aus. 
+
+| __Input Assignment__  |  Eingangszuweisung ... wird ergänzt
+….
+
+| Timecode-player  |  Das ist ein ganz cooles Tool, das Du Dir wie ein Videoschnittprogramm für eine Lichtshow vorstellen kannst. Man kann auf den einzelnen Spuren Audiofiles und Lichteffekte zeitlich platzieren, so wie man in einem Videoschnittprogramm Video- und Audioschnipsel einfügen kann.
+
+*Wiki:* 
+
+| Visualizer  |  Wie der Name andeutet, kannst Dir in einem Visualizer deine Show vorab visualisieren, also anschauen. Mit der Bühnenansicht liefert DMXControl3 einen internen 2D-Visualiser der für die meisten Anwendungen komplett ausreicht. Wer es komfortabler haben möchte, kann auf (externe) 3D-Visualiser zurückgreifen, die bis in die Kategorie virtuelle Welten/Metaverse (z.B. Unreal Engine) reichen können. Siehe Kapitel x.x 
+|  |  
+|  |  
+|  |  
+|  |  
+|====================
+
+_Offene Begriffe (für spätere Kapitel):_
+-	Highlight. Siehe „schon gewusst“ SG5
+-	Blackout
+-	Autoprepare
+
+== Die Schummelseite 
+
+Wie in vielen Büchern der Reihe „<Irgendwas> für Dummies“ gibt Dir Stefan hier zwei „Schummelseiten“ zu Beginn mit, die die wichtigsten Botschaften des Skriptes zusammenfassen.
+
+Deine Showaktivitäten bestehen immer aus 3 Teilen:
+
+* Einrichten (Vorbereiten) der Show inkl. Setup der Lampen
+* Editieren (Programmieren) der Show
+* Exekutieren (Abfahren) der Show
+
+=== Vorbereitung der Show
+
+* Du benötigst eins der von DMXControl3 unterstützten DMX-Interfaces, ansonsten kannst Du die Show nur in der 2D-Bühnenansicht oder in einem 3D-Visualizer sehen.
+* Halte Dir stets eine Übersicht über deine Lampen bereit. In der Regel können sie bei jeder Show immer die gleichen DMX-Adressen behalten. Daher mache Dir einen Plan bzgl. der Position der Lampen, ihrer Adressen und in welchem Kanalmodus sie betrieben werden sollen.
+* Suche die entsprechenden DDF-Dateien vorab heraus. Notfalls kannst Du diese selbst erstellen.
+* Nun kannst Du die Geräte in der Bühnenansicht oder im Project Explorer erzeugen und zu Gruppen zuordnen. Dabei auf die richtige Adresszuordnung achten.
+
+=== Programmieren der Show 
+
+* Wichtig ist eine Gruppenzuordnung der Lampen. Eine Lampe muss nicht nur der initial erzeugten Gruppe bei Einrichten zugeordnet sein, sondern kann auch zusätzlich in anderen Gruppen enthalten sein. 
+* Eine Gruppe können gleichartige Geräte sein, aber z.B. auch alle Lampen mit einer bestimmten Aufgabe wie Frontlicht, Blender, Seitenlicht, Oberlicht, linke Seite, rechte Seite usw.
+* Denke bei der Programmierung mit DMXControl niemals in DMX-Werten, sondern nur in Eigenschaften (Attributen) wie Farbe, Position, Stroben usw.
+* Nachdem Du diese Eigenschaften für Gruppen oder einzelne Lampen eingestellt hast, kannst Du die aktuelle Lichtstimmung in einer Cue abspeichern. Die eingestelten Eigenschaften kannst Du vorher im Programmer überprüfen und ggf. editieren.
+* Eine Show kann aus einer oder vielen Cuelists bestehen. Eine Cuelist kann eine oder viele Cues enthalten, die über verschiedene Mechanismen getriggert (also gestartet) werden können, z.B. manuell, per Timecode oder beat getriggert.
+* Möglicherweise möchtest Du die Cuelisten nicht direkt über die GO-, Pause- oder Stop-Button in der Cuelist steuern, sondern die Aktivierung über die Tastatur, ein DMX- oder MIDI-Pult oder mit einem Softdesk vorbereiten. Dann musst Du Dich mit dem Input Assignment beschäftigen.
+* Cues können besonders wirkungs- und effektvoll sein, wenn Du Fanning oder einen der vielen vorbereiteten Effekte integrierst.
+* Während des Programmierens kannst Du die Show stets in der Bühnenansicht prüfen oder (mit etwas mehr Aufwand) auch in einem Visualizer anschauen.
+
+=== Abfahren (Exekutieren) der Show 
+
+* Das Ausführen der Show hängt sehr stark von der Art der Veranstaltung ab (Band-Konzert, Musical, Theater, Club-/Tanzveranstaltung). Das wurde natürlich schon während der Programmierung berücksichtigt.
+* Entsprechend werden unterschiedliche Mittel eingesetzt. Manchmal nur eine Cuelist, die pro Cue manuell weitergeschaltet wird, manchmal baut man sich ein Softpult um live per Button-Klick bestimmte Cuelisten zu starten.
+* Es gibt auch Shows in denen man die Cues der Lichtshow präsize auf Millisekunden zu einem fertigen Song startet, d.h. während dieser Zeit läuft alles ganz automatisch ab. 
+* Die vielfältigen Möglichkeiten wirst Du in diesem Skript kennenlernen.
+
+=== Übersicht über Quellen 
+
+* Forum https://forum.dmxcontrol-projects.org/
+* Wiki https://wiki-de.dmxcontrol-projects.org/index.php?title=Hauptseite
+* Youtube-Channel https://www.youtube.com/dmxcontrol
+* Buch „Lichttechnik für Einsteiger“ tbd. (Elektor-Link)
+
+*Mitwirkende:*
+
+* DMXControl: Frank B., Marten J., Stefan Ki., Jens-Peter K. Christian H. ala Hoc
+* HTW Berlin: Patrick F., Bruno A., Roman W., …
+
+
+

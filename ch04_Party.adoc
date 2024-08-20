@@ -1,0 +1,91 @@
+:imagesdir: ./images/Kap4/
+
+
+= **Kapitel 4: Eine Party**
+
+Jana hat einen runden Geburtstag, den sie richtig feiern möchte. Dazu hat Jannik eine Partylocation gebucht. Leider gibt es dort kein „richtiges“ Disco-Licht. Also werden kurzerhand die 6 LED PARty-Lampen sowie 4 relativ kleine Movingheads mitgebracht. Das Problem ist, dass auf der Party alle Leute Party machen wollen und niemand hinter einem Lichtpult stehen möchte. Es soll schon möglichst viel automatisch ablaufen. Jannik wird die Möglichkeiten von DMXControl3 dazu in diesem Kapitel vorstellen.
+
+Natürlich haben etliche Disco-Lampen einen eingebauten Sound-Modus, der z.B. zufällig Farben ändert, wenn das eingebaute Mikrofon irgendwelche Lautstärkeänderungen erkennt oder Beats vom Schlagzeug identifiziert. Diesen eher „primitiven“ zufälligen Modus zu nutzen, würde aber an der Ehre von Jannik kratzen. 
+
+In diesem Kapitel geht es dagegen hauptsächlich um
+* Beat-Trigger
+* Endlos-Cuelisten
+
+Aber dazu später mehr. Erstmal starten wir mit den sogenannten (einfachen) Effekten und der Struktur einer Show für eine Party. Bisher hat Jannik mit eher statischen Lichtstimmungen und einer Haupt-Cueliste gearbeitet.
+
+image:Kap4_PartyProgrammierung.JPG[PartyProgrammierung]
+
+Abb. 4-1: Party Programmierung
+
+== Baukastensystem für Cuelisten
+
+Jannik hat absolut keine Idee, wie die Show zu Jana’s Party programmiert werden sollte. Er will unterschiedliche Farben, etwas Lauflicht-artiges, die Moving Heads sollen sich scheinbar zufällig bewegen und das soll alles mit möglichst geringem Aufwand bedienbar sein.
+
+Also wird Stefan wieder um seinen Rat gefragt. Er meint, dass man maximale Flexibilität durch ein „Baukastensystem“ aus verschiedenen Cuelisten erhält. Also keine fertige Gesamt-Cueliste, sondern viele einzelne Cuelisten, die für verschiedene einzelne Eigenschaften oder auch Gerätegruppen zuständig ist. Ebenso kann es Cuelisten geben, die verschiede Typen von Effekten beinhalten. Diese Cuelisten können nun manuell oder automatisch zufällig aufgerufen werden.
+
+Ein mögliches Szenario wäre:
+
+* Alle 5 Minuten eine verschiedene Grundfarbe aufrufen
+* Alle 2 Minuten wechselt der Lichteffekt
+* Verschiedene Typen von Effekten: im Chaser laufen 1,2,4 oder 8 Lampen, ebenso können über verschiedene Dimmerwerte interessante Effekte erreicht werden
+* falls Moving Heads vorhanden sind: Flower Effekte u.ä. über Gobowechsel
+* Die Effekte werden alle 10 Minuten weitergeschaltet
+
+Diese Baukastenelemente können z.B. manuell über verschiedene Input-Trigger gestartet werden. So könnte ein Softdesk erstellt werden, bei dem Buttons für die Cuelists angelegt wurden.
+
+Will man es mehr automatisch haben, können diese Cuelisten in übergeordneten Cuelisten angeordnet werden. Solche Cuelisten können im Endlos-Mode betrieben werden. Die aufgerufenen Cuelisten werden z.B. alle x Minuten weitergeschaltet. Ebenso kann auch der Random-Mode genutzt werden um mehr Zufall in die Show zu bringen.
+
+
+
+== Fit for (einfache) Effekte
+
+Statische Lichtstimmungen können auf Dauer langweilig sein. DMXControl3 bietet selbstverständlich die Möglichkeit, auch dynamische Effekte wie zum Beispiel Bewegungen für Moving-Heads oder Lauflichter auf den Dimmer, der Farbe und nahezu allen anderen Gerätefunktionen anzuwenden. Dies erfolgt allesamt mit Hilfe des Fensters Effekte und Filter (Effects and Filters). Die mitgelieferten Effekte sind dabei in verschiedene Kategorien unterteilt, die darauf basieren, welche Effekte bzw. Filter bei welchen Gerätefunktionen anwenden kannst.  
+
+* Möchtest du einen der Effekte anwenden, ziehst du diesen zum Beispiel per Drag & Drop auf die gewünschte Gerätefunktion im Fenster Geräteeigenschaften. 
+* Jeder neu eingefügte Effekt wird mit einer Standardkonfiguration angewendet. Um diesen auf deine Bedürfnisse anzupassen, musst du am Ende durch Ausprobieren herausfinden, welche Werte für die verschiedenen Parameter eines Effekts gut aussehen. Bitte beachte, dass sich bei allen numerischen Parametern ebenfalls das Fanning (Kap. 5) verwenden lässt.
+* Das Hinzufügen von dynamischen Effekten zu einer Szenenliste funktioniert auf die gleiche Weise wie bei statischen Lichtstimmungen. Hier gibt es seitens DMXControl3 keine weitere Differenzierung. Dem entsprechend kannst du auch statische und dynamische Elemente einer Lichtstimmung in einer Szene mischen, sofern es dem grundlegenden Konzept deines Projekts hilfreich ist. Konkret bedeutet dies, dass du sowohl eine Bewegung als auch statische Werte für den Dimmer, zum Beispiel in Form eines Fanning in nur einer Cue speichern kannst.
+
+image:Kap4_Jannik_FotoParty.JPG[JanniksParty]
+
+Abb. 4-2: Janniks Party
+
+=== Effekte über Effekte
+
+*Lauflicht, Chaser *
+
+Die Lampen auf denen das Lauflicht laufen soll, in eine Device Gruppe zusammen packen. Diese Gruppe in der Stage View auswählen. Im Device Control Fenster eine Farbe auswählen und dann aus den „Effekt und Filtern“ einen Chaser auf den Dimmer der Gruppe im Device Control ziehen. Dann sollte das Lauflicht schon laufen.
+Nun kannst Du das dann als Szene speichern.
+
+*Stroben*
+
+Hier funktioniert es im Prinzip genauso. Du wählst die Gruppe aus und stellst einen Strobe-Faktor beim Dimmer im Device Control ein.
+
+Livestream "Effekte über Effekte über Effekte". In diesem Livestream haben wir ab 1:25:00 mal gezeigt, wie flexibel der Circle-Effekt ist.
+Link: https://www.youtube.com/watch?v=cl6z3rV7_jI&t=7693s
+
+_zu ergänzen: 1D-Effekte und 2D-Effekte_
+
+=== Effektvisualisierung
+
+Um besser zu verstehen, was die verschiedenen Parameter eines Effekts bewirken, kannst du dir die Effektvisualisierung (Effect Visualizer) öffnen. Sobald du den Effekt in der Gerätesteuerung auswählst, siehst du die aktuelle Vorschau. 
+https://wiki-de.dmxcontrol-projects.org/index.php?title=Effect_Visualizer_DMXC3
+
+
+== Sound to Light – auch mit DMX?
+
+_zu ergänzen_
+
+
+== Farben und Colorlisten – Was ist das denn nun schon wieder?
+
+Unter den Effekten gibt es auch den Colorchaser, der standardmäßig mit bunten Farben aus dem Spektrum agiert. Jannik ist das aber zu bunt und zu grell – er möchte mit dezenteren Farben arbeiten. Dazu kann man den Effekt mit einer Colorlist (Farbliste) parametrisieren. Aber wie kommt man zu dieser Farbliste?
+
+Diese gehört zur Kategorie „Ordnungsliste“ in den Verzeichnissen im Projektexplorer. Man erstellt in diesem Verzeichnis ein neues Objekt, gibt ihm den Typ Farbliste und kann dann sein eigenes Set an Farben definieren. Super simple, nur anfangs nicht leicht zu finden, denkt sich Jannik.
+
+Und vergessen Sie nicht die Möglichkeit, mit Cues zu arbeiten, die in einer Schleife ausgeführt werden. Innerhalb der Cues geben Sie dem ersten Cue die Werte 255;0;0 # 0;0;255 für Farbe und dem zweiten 0;0;255 # 255;0;0, wenn der Chaser für jedes Gerät alternativ sein soll in der ausgewählten Gerätegruppe.
+Übrigens funktioniert das sinngemäß auch gleichermaßen mit Gobo-Listen.
+
+== Softdesk - der Start
+
+_<to do: Einfache Konzepte Softdesk bescheiben, wo noch keine tiefe Kenntnis über das Input Assignment erforderlich ist. z.B. 
+(Toggle)Button ansteuern_

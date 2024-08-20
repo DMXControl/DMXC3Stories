@@ -1,0 +1,36 @@
+== **Einleitung – warum dieses Skript?**
+
+Dieses Dokument entstand als Skript im Rahmen der Vorbereitung eines DMX-Lichttechnik-Kurses als „Allgemeine Wissenschaftliche Erweiterung (AWE)“ an der HTW Berlin. In diesem Tutorial geht es hauptsächlich um die Anwendung des freien Tools DMXControl3 für die DMX-basierte Lichtsteuerung, da die Teilnehmer am Ende des Kurses in der Lage sein sollen, eine Show mit dem Tonkollektiv der HTW zu beleuchten. 
+
+Natürlich gibt es schon sehr viele Youtube-Beiträge zu DMXControl3 und noch viel mehr Wiki-Artikel dazu. Diese Quellen werden auch im Skript stets zur Vertiefung des Verständnisses des Tools empfohlen und verlinkt. Viele Grundlagen zur DMX-Technik werden auch im schon betagten Buch „Lichttechnik für Einsteiger“ beschrieben, welches von unserem Verein DMXControl-projects.org herausgegeben wurde. 
+
+In diesem Dokument soll es also nicht um die Beschreibung der Menüpunkte und einzelnen Funktionen wie im Handbuch oder in den Wiki-Seiten gehen, sondern um grundsätzliche Herangehensweisen (Stories) bei der Nutzung von DMXControl3. Aufgrund des riesigen Umfangs von DMXControl3 kann und will dieses Skript niemals die Wiki-Seiten ersetzen. Mit diesem Skript soll aber der Zugang zum Tool DMXControl3 erleichtert werden, wobei sich das Skript konkret auf die Version 3.3 bezieht.
+
+Daher werden verschiedene Anwendungsfälle in den diversen Showtypen herausgestellt und viele Tricks verraten. Eine nach Zeitmarken gesteuerte Show ist etwas anderes als ein Livekonzert, wo der Lichtoperator auf aktuelle Situationen reagieren muss. Ganz anders ist es wiederum bei Partys, wo er sogar zwischendurch mal ein Bier trinken gehen kann und das Programm allein laufen lassen kann.
+
+Aus systematischen und didaktischen Gründen wurden die Anwendungsfälle (Stories) immer konkreten Eventtypen (z.B. Disco, Musical) zugeordnet. Dennoch kann man sie auch in anderen Szenarien anwenden. Es empfiehlt sich also, das Skript komplett zu lesen, auch wenn man z.B. nur konkret eine Party plant. Hinzu kommt, dass die Anwendungsfälle auch mit jedem Kapitel immer komplexer gestaltet werden. Letztendlich erlangt man das komplette Wissen nur durch Üben, Üben und nochmals Üben.
+
+
+
+=== Lizenz
+
+Dieses Skript ist lizensiert mit der Creative Commons Attribution-ShareAlike 4.0 International License. Die Lizenz kann hier eingesehen werden: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.dehttp://url[creativcommons.org]
+ 
+Wir danken allen Beteiligten, insbesondere dem DMXControl-Marketing Team für die Unterstützung zu diesem Skript. Es wurden viele schriftliche und mündliche Aussagen von deren Mitgliedern einfach „übernommen“. Ziel ist es, eventuell dieses Skript langfristig durch die Community zu einem open book auszubauen.
+
+Statt einem konkreten Wiki-Link wird manchmal nur der erforderliche Suchbegriff als Stichwort angegeben, so dass man selbst im DMXControl-Wiki suchen kann.
+Natürlich finden sich auf der Webseite des Vereins http://DMXControl-Projects.org[DMXControl-Projects.org] auch Spendenmöglichkeiten für dieses Projekt.
+
+
+
+=== Die Story
+
+In diesem Skript treten drei Personen auf, die an mehreren Lichtshows mitwirken - Jana, Jannik und Stefan. 
+Jana ist vom Beruf Bühnenbildnerin und übernimmt das Lichtdesign. Sie hat mehr Ideen als ein Hund Flöhe hat und sieht sich als die unangefochtene Chefin der Show. Sie weiß aus ihrem Theater- und Musicalhintergrund, dass die Programmierer einer Show mit Cues und Cuelisten arbeiten, sie selbst arbeitet aber nur mit Skizzen zur Show. Wenn sie vor einer Vorstellung nicht mindestens einmal ihre Ideen und Meinungen ändert, dann ist etwas faul.
+
+Jannik ist der Programmierer der Show mit DMXControl3. Da er schon mit einigen Lichtsteuerungs-Pulten gearbeitet hat, kennt er viele allgemeine Konzepte der Showprogrammierung, aber er ist noch nicht so richtig firm mit einer Software-Steuerung DMXControl3. Ddaher hat er vielleicht eine große Gemeinsamkeit mit vielen Lesern. Jannik ist sehr begeistert, was diese Freeware im Vergleich zu vielen Pulten alles beherrscht und wie schnell er sich in die Software hineinarbeiten kann.
+
+Der Experte im Hintergrund ist Stefan. Er ist intensiv mit der Entwicklung von DMXControl3 verbunden, kennt fast jedes Feature und hat schon hunderte Wiki-Seiten zu diesem Tool erstellt. Außerdem erstellt er regelmäßig mit einem Kumpel aus dem Projekt die „Schon gewusst...“-Beiträge im DMXControl-Forum, die den Nutzer an sehr hilfreiche Nutzungstricks erinnern. So kann man ihn zu jedem Problem fragen und meistens hat er schnell eine Antwort parat. In der Tat sind einige Dinge implementiert, wo selbst die Entwickler schon vergessen haben, dass es sie gibt – Stefan kennt diese und unterstützt Jannik stets mit Tipps.
+
+Diese drei Personen– obwohl sie manchmal unterschiedliche Ansichten haben - werden im Team also mit Euch gemeinsam dieses Buch und die unterschiedlichen Shows gestalten.
+ 

@@ -1,0 +1,240 @@
+:imagesdir: ./images/Kap3/
+
+= **Kapitel 3: Nun geht es endlich los – die erste richtige Show**
+
+== Showvorbereitung
+
+In der Aula steht ein Konzert des HTW-Tonkollektivs, einem Chor mit Musikern an. Auf der Songliste der Rhapsody-Show stehen mehrere Lieder der Band Queen, die aber im Klassikstil mit einem Orchester interpretiert werden.
+
+Daher hat sich Jana entschieden, das Lichtdesign dezent zu gestalten. Im Prinzip gibt es zu jedem Song ein bis drei statische Lichtstimmungen (Cues), die eine farbige Raumatmosphäre definieren. 
+
+Wir beginnen also mit einem relativ übersichtlichen, aber nicht mit einem allereinfachsten Szenario einer Show, um verschiedene grundlegende weitere Features von DMXControl3 vorstellen zu können.
+
+Jana hat ihre Design-Vorstellungen aufgezeichnet und dabei zwischen der Bühne (inkl. vordere Wandflächen), den Seitenwänden und der Leinwand im Hintergrund unterschieden:
+
+image:Kap3_JanaDesign01.JPG[Beispiel Design Jana Cue 12 ]
+
+Abb. 3-1: Beispiel Design Jana Cue 12
+
+Hier noch ein 2. Beispiel aus ihrem Regiebuch, im Finale soll etwas mehr Action sein.
+
+image:Kap3_JanaDesign02.JPG[Beispiel Design Jana Cue 20]
+ 
+Abb. 3-2: Beispiel Design Jana Cue 20 
+
+Es gibt ca. 30 solcher Bilder, die sie an Jannik übergibt. Jana hat sich keine Gedanken um die verfügbaren Lampen gemacht, geschweige denn um die Installation. Sie sagt: „Jannik, nun mach mal!“
+
+Natürlich kann es nicht sofort mit der Show-Programmierung losgehen. Jannik schaut erstmal nach den verfügbaren Lampen vom Tonkollektiv und installiert diese mit anderen Studenten am Truss und auf dem Boden. Die dabei einzuhaltenden Sicherheitsmaßnahmen, elektrischen Randbedingungen der Stromkreise usw. werden wie in jeder seiner Shows umgesetzt, sollen aber hier nicht betrachtet werden. Er stellt fest, dass für die erste Show keine für die Aula passenden leistungsstarken Movingheads zur Verfügung stehen.
+
+Wichtig ist erstmal, dass vor oder während des Aufbaus ein DMX-Verkabelungs- und Adressierungs-Plan erstellt wird.
+
+* Jede Lampe hat einen Typ für den das passende DDF bereitgestellt werden muss.
+* Jede Lampe hat eine DMX-Adresse. 
+* An den Lampen muss eingestellt werden, welcher Kanalmodus verwendet werden soll (dies entspricht dann auch dem zu wählenden DDF).
+
+IMPORTANT: Die Verfügbarkeit der passenden DDFs ist entscheidend für die schnelle und korrekte Showprogrammierung. Ein nicht passendes DDF wird später ungewünschte Effekte hervorrufen.
+
+Es wird also unbedingt eine Skizze und/oder eine Tabelle benötigt, wo die Typen, die DMX-Adressen, Eigenschaften und die ungefähren Positionen der Lampen aufgeführt sind.
+
+image:Kap3_DMXPlan.jpg[Beispielskizze Plan für Lampen-Setup]
+
+Abb. 3-3: Beispielskizze Plan für Lampen-Setup (muss natürlich ausgetauscht werden)
+
+Dieser Plan kann nun in der sog. Setup (Einrichtungs-)Phase in DMXControl3 in der Bühnenansicht und mittels Patching umgesetzt werden.
+
+
+=== Geräte und DDFs
+
+Jedes Gerät unterstützt basierend auf seinem technischen Aufbau und der Firmware unterschiedliche Eigenschaften, die gesteuert werden können. Abgesehen vom GDTF-Ansatz gibt es bisher noch keinen allgemeinen Standard zur softwaremäßigen Beschreibung von Lampeneigenschaften. DMXControl hat sein eigenes DDF-Format (device definition file) auf der Basis von XML definiert. Die Erstellung solcher Files kann mit einem normalen Text- oder XML-Editor gemäß der vorgegebenen Syntax und Semantik erfolgen. Mit dem DDF-Creator gab es auch einen Versuch, ein interaktives Tool anzubieten, aber leider wird das Tool aktuell nicht mehr gepflegt. 
+
+=== Bühnenansicht und Patching
+
+Die Bühnenansicht ist der zentrale Teil der Show während der Einrichtung, des Programmierens und zum Teil auch während der Aufführung. Man könnte zwar alle Geräte auch im Projekt Explorer einrichten und sehen, aber in der Bühnenansicht hat man gleich eine grafische Darstellung mit 2D-Animation der dargestellten Farben, Gobos und Bewegungen. Man kann sich die Lampen ungefähr so wie im gerade vorgestellten Plan anordnen und hat somit immer einen guten Überblick, was diese gerade machen. Später wird erklärt, wie auch ein 3D-Visualizer zur Ansicht verwendet werden kann. Ein moderner Mensch würde von einer Art digitaler Zwilling sprechen, sagt Stefan.
+
+Neue Lampen können über verschiedene Menüpunkt inkl. Kontextmenü angelegt werden. 
+
+NOTE: Hier einige Tipps dazu:
+
+* Wenn das richtige DDF nicht in der Liste auftaucht, sollte das entsprechende xml-File in das Geräte-Verzeichnis „Eigene DDFs“ kopiert werden.
+* Hat man es nicht gefunden, lohnt ein Blick in die Cloud/DDF-Bibliothek.https://ddf.dmxcontrol.de/home . Auch im Setup-Menü gibt es neben der DDF-Suche einen entsprechenden Button („Buch-Icon“)
+* Hat man mehrere Geräte vom gleichen Typ, können diese auf einen Schlag eingerichtet werden. Obwohl technisch nicht zwingend erforderlich, kann man zwischen den Geräten eine Lücke bzgl. der DMX-Kanäle lassen. Stefan sagt, dass es das Adressieren einfacher machen könnte, wenn man zum Beispiel seine Lampen in 10er-Schritten patcht (also nur Adressen wie 20, 30, 40, 70 usw. vergeben werden. Für seine eigenen Lampen hat man meistens sowieso immer feste voreingestellte Adressen.
+* In den meisten Fällen ist es sinnvoll, gleich automatisch eine Gruppe für die Geräte des gleichen Typs anlegen zu lassen. Wenn man möchte, dass sich diese Geräte in verschiedenen Situationen immer „gleich verhalten“, kann man dann später die Programmierung über die Gruppe realisieren, statt immer alle Geräte einzeln auszuwählen. Mehr zu Gruppen findet man im Kap. x.x
+
+TIP: Stefans Tipp: Platziere das Gruppen-Icon in die Nähe der Icons der einzelnen Lampen.  
+
+
+.DDF Ablage
+[width="100%",options="header,footer"]
+|====================
+| image:Kap3_DDFAblage.jpg[] |  Für die eigenen DDFs gibt es einen vorbereiteten Ablageplatz.
+Diesen findet man am besten über das Windows-Menü unter dem Eintrag DMXControl3.
+Einfach die DDFs, die man sich selbst erstellt hat oder aus der Cloud geladen hat, in dieses Verzeichnis kopieren.
+
+Wenn man ein selbst erstelltes DDF für ein neues Gerät hat, weil dieses noch nicht in der Cloud verfügbar war, ist es natürlich sehr fair, wenn man dies selbst hoch lädt. Die Community wird es Dir danken!
+|====================
+
+
+=== Patching
+
+Jannik freut sich, nun kann es ja los gehen mit der Programmierung. „Halt!“, ruft da Stefan. „Überprüfe sicherheitshalber noch mal die Kanalbelegung in der Kanalübersicht. Dort siehst Du wie die Kanäle der Lampen über das Universum verteilt sind. Du wirst zwar später nie mehr die DMX-Adressen benötigen, aber es können sich beim Setup Flüchtigkeitsfehler eingeschlichen haben, die später zu total unerwünschten Effekten führen könnten.“
+
+Bitte prüfe daher immer, ob 
+* sich Kanalbelegungen der Lampen ungewollt überschneiden (das kann in seltenen Ausnahmefällen gewünscht sein, aber dazu kommen wir später)
+* die Lampen auch wirklich die gewünschte Zahl der Kanäle belegen, also der Kanalmodus konsistent zum an der Lampe eingestellten Wert ist.
+
+IMPORTANT: In unerwartet und selten vorkommenden Fehlerfällen kann man über die Kanalübersicht auch prüfen, ob die Lampen überhaupt reagieren. Dazu muss man einen DMX-Kanal auswählen und mit dem Slider auf der linken Seite entsprechende DMX-Werte zwischen 0 und 255 einstellen. Diese werden sofort an die DMX-Ausgabe weitergereicht (und gehen nicht über den Programmer). Dies ist die einzige Stelle in DMXControl3, wo der Nutzer mit wirklichen DMX-Werten arbeitet.
+
+Aber nun zum Patching:
+
+Was ist das für ein Projekt, in welchem nicht einmal neue Geräte hinzukommen und vorhandene Geräte hierfür eine andere DMX-Adresse erhalten müssen? Oder ihr ändert euren Aufbau und der bestehende Patch passt dafür nicht. Dann geht es natürlich direkt an das Ändern der DMX-Adressen.
+
+__zu ergänzen: Verschieben von Geräten in ein anderes Universe>
+https://forum.dmxcontrol-projects.org/core/index.php?article/894-schon-gewusst-38-schnelleres-%C3%A4ndern-des-patchs-bitte/
+__
+
+Nachdem nun alles zu den DMX-Kanalbelegungen geklärt ist (zu komplexeren Geräten kommen wir später), müssen wir uns noch das Programmierkonzept überlegen, mit dem Jana’s Design am besten umgesetzt werden kann. Unbewusst hat Jana ja die Geräte schon eingeteilt:
+* Chor- und Orchesterbeleuchtung auf der Bühne (Frontlicht und Oberlicht)
+* Hintergrundbeleuchtung der Leinwand hinter dem Chor
+* Wandbeleuchtung neben der Bühne
+* Wandbeleuchtung an den Seitensäulen
+
+Damit wird Jannik sofort klar, dass er seine Geräte in entsprechende Gruppen einteilen sollte und einen Teil der Programmierung nur noch über diese Gruppen tätigen sollte. (Für die Informatiker unter Euch: Das ist eigentlich eine klassische Dekomposition in einem Algorithmus, was zu mehr Struktur, Übersichtlichkeit und Effizienz in der Implementierung führt.)
+
+Zum Teil entsprechen die Gruppen schon den Initialgruppen aus dem Gerätesetup (diese sollten dann ggf. nur noch umbenannt werden), zum Teil werden neue Gruppen erstellt in dem alle Gruppenmitglieder ausgewählt werden und eine Gruppe dafür angelegt wird. Eine Lampe kann problemlos parallel in mehreren Gruppen enthalten sein. Ebenso können bei DMXControl Lampen unterschiedlicher Typen in einer Gruppe sein. Das Programm versucht sein Bestmögliches, dass sich dann alle Lampen in der Gruppe gleichartig verhalten. Dennoch kann es kleine Unterschiede z.B. in der Farbdarstellung geben.
+
+=== StageView - Bühnenansicht 
+
+Richtig Spaß macht die Showprogrammierung nur mit der Bühnenansicht. Jannik ordnet sich dort nun alle Lampen ungefähr so an, wie sie in der Aufbauphase installiert wurden:
+
+* 6 LED PARs für Orchesterbeleuchtung (Gruppe Orchester)
+* 6 LED PARs für Chorbeleuchtung (Gruppe Chor)
+* 2 zusätzliche LED Washer für Chorbeleuchtung (Gruppe Washer)
+* 2x4 LED PARs für die seitlichen Wände (Gruppe Säulen)
+* 4 LED Bars für Hintergrundbeleuchtung der Leinwand (Gruppe Leinwand)
+* 6 LED Bars für die Bühnenfront (Gruppe Bühne)
+* 2 PAR Spots als Verfolger (Gruppe Verfolger)
+
+Gerade wenn man viele Lampen hat, macht es Sinn, auf die Möglichkeiten zurückzugreifen, die Anordnung halbautomatisch zu beeinflussen. Man kann die Icons der Lampen  
+
+* gleichmäßig auseinander ziehen
+* in bestimmten Formen anordnen, z.B. über Shortcuts 
+•	Strg+C - Anordnung im Kreis, 
+•	Strg+F - Anordnung entlang eines Pfades, 
+•	Strg+M  Anordnung in einer Matrix 
+•	+Shift  Icon-Beschreibung ignorieren
+* sortieren, verschieben
+* F10 - Camera-Control ein- und ausschalten, 
+* F7 - Reset der Ansicht
+-	
+-	…
+
+Bei Effekten ist es immer relevant in welcher Reihenfolge die Lampen in der Gruppe angesiedelt sind. (Das gilt insbesondere für das Fanning welches später erklärt wird.) Die Reihenfolge hat nichts mit der Positionierung in der Bühnenansicht zu tun, sondern mit der Reihenfolge der Geräte im Projektexplorer. 
+
+== Das Showkonzept
+
+Wie erwähnt, denkt Jana im Theatermodus. Dort soll jede Aufführung total gleich sein, die Lichtstimmungen absolut optimiert, also die fertigen Lichtstimmungen im Prinzip nie mehr angefasst werden. Das hat seine Berechtigung und gegen dieses Konzept ist im Prinzip nichts einzuwenden.
+
+Allerdings kommt Jannik eher aus dem Live-Bereich. Er ist es also gewohnt spontan zu reagieren, die Helligkeit oder auch Farben von Lampen mal spontan anzupassen. Das sture Abfahren einer Show aus der Konserve widerstrebt ihm (obwohl es natürlich bei bestimmten Events großen Sinn macht). Wie sollten wir diesen „Widerspruch“ auflösen? Natürlich durch einen Anruf bei Stefan.
+
+Er macht den Vorschlag, mehrere Cuelisten in der Show zu benutzen. Eine Hauptliste, wo die Lichtstimmungen der einzelnen Songs hintereinander fest programmiert werden. Daneben gibt es je eine Cueliste für die Chor- und Orchesterbeleuchtung. Diese Cuelisten werden Executoren zugeordnet, damit man darüber auch live die Helligkeit der jeweiligen Lampengruppe anpassen kann.
+
+image:Show1_Uebersichtv02.JPG[Cuelisten und zugeordnete Ausführungselemente]
+
+Abb. 3-4: Cuelisten und zugeordnete Ausführungselemente
+
+=== Fit for Cuelist
+
+Jannik kennt bereits Cuelisten von den Pulten und fasst noch mal zusammen: Cuelisten sind eine Abfolge von Lichtstimmungen, also Cues (Szenen). Die Cues enthalten Eigenschaftswerte von einem oder mehreren Geräten (z.B. Dimmer 60% und rot). Was in einer Szene (Cue) gespeichert ist, siehst du, wenn du die jeweilige Szene in den Programmer lädst. Cuelisten können gestartet und gestoppt werden, die enthaltenen Cues haben oft eine (Ein-)fade-Zeit und eine Dauer.
+
+Stefan ergänzt: Cuelisten können wiederholt und in Loops ablaufen – das stellt man im Mode-Menü ein. Mehrere Cuelisten können auch parallel ablaufen. Dabei sind Prioritäten und Gruppierungen zu beachten. Manchmal wird es wirklich knifflig, wenn verschiedene Cuelisten eine gleiche Eigenschaft einer Lampe überlagern. Diese komplexeren Aspekte werden später im Kap. x.x besprochen, nun wollen wir erstmal die Cuelisten für die Rhapsody-Show erzeugen.
+
+Fragt man ChatPT, wie eine Show erstellt wird, kommt diese doch sehr allgemeine Antwort:
+
+Erstellen von Abläufen: Definieren Sie den zeitlichen Ablauf der Lichtshow, indem Sie verschiedene Szenen in einer bestimmten Reihenfolge anordnen. Sie können Übergänge zwischen den Szenen festlegen, um einen sanften Übergang von einem Zustand zum nächsten zu ermöglichen.
+
+Der Dirigent hat sich z.B. sehr fließende und keine ruckartigen Übergangszeiten zwischen den Cues gewünscht. Also hat Jannik eine sehr große Fadezeit (z.B. 20 Sekunden) in einigen Cues eingetragen. 
+
+Stefan hat den prinzipiellen Ablauf der Cue-Erzeugung in DMXControl3 aufgezeichnet (Abb. 3-x) und erklärt:
+
+Um eine Lichtstimmung vorzubereiten, wählst du in der Bühnenansicht im Idealfall immer eine Gerätegruppe aus. Dann füllt sich die Gerätesteuerung (Device Control) strukturiert mit allen Funktionen, die das Gerät mitbringt. Gleichzeitig werden die Schaltflächen in den Steuerungsfenstern (Control Panel) aktiv, immer jeweils im Kontext der verfügbaren Funktionen. Über diese Fenster kannst du nun eine einfache, statische Lichtstimmung einstellen. Aber aufgepasst: gespeichert ist an dieser Stelle noch nichts. Wird DMXControl 3 geschlossen, ist diese Lichtstimmung weg. Vielmehr ist es die Vorstufe, um die Lichtstimmung später richtig abzuspeichern.
+
+Möchtest du wieder alles auf 0 setzen, klickst du in der linken Seitenleiste auf den Button [Programmer leeren (Clear programmer)].
+
+image: Kap03_CueListErstellen.jpg[Grobes Szenario „Cues erstellen“]
+
+Abb. 3-x: Grobes Szenario „Cues erstellen“
+_<Offen in Abb.: Update-Button, Clear programmer>_
+
+Nun gibt es für jede Cue in der Cueliste noch viele Parameter, die mit dem Triggern (also dem Auslösen) und dem Zeitverhalten zu tun haben. Eine Cue muss nicht einfach so plötzlich da sein und wieder weg sein. Im Gegenteil: Eine Cue hat gar kein Ende, sie hört nicht einfach auf. Sie wird irgendwann durch eine nachfolgende Cue überschrieben. Schauen wir uns den zeitlichen Ablauf an: 
+
+IMPORTANT: Der Lebenszyklus einer Cue kann bei der Showgestaltung ausgenutzt werden. 
+
+image:Kap3_CueLebenszyklus.png[Lebenszyklus einer Cue]
+
+Abb. 3-5: Lebenszyklus einer Cue
+
+Durch den Trigger wird die Zeit oder das Event zum Auslösen vorgegeben. 
+
+Es gibt verschiedene Trigger (manual, one shot, follow,..). Wie der Name es vermuten lässt, muss man bei „manual“ selbst z.B. mit dem GO-Botton zum richtigen Zeitpunkt weiterschalten. Dies ist der Standardfall. Hat man eine fixe zeitliche Abhängigkeit zwischen den Cues, bieten sich der follow- oder wait-Trigger an (siehe Abb. 3-x.). Gibt es feste Zeitpunkte zum Starten einer Cue verwendet man den rtc-Trigger (Absolutzeit) oder den timecode-Trigger. Letzteren kann man sich als konkreten Zeitpunkt innerhalb eines Songs vorstellen, dazu mehr im Kapitel Timecode-Player. DMXControl3 kennt auch ein (internes und externes) Beatsignal – dafür gibt es den Beattrigger, der sozusagen die Cues im Takt weiterschaltet. Der one-Shot-Trigger wird nur bei Effekten verwendet. 
+
+.trigger
+[width="100%",options="header,footer"]
+[%autowidth]
+|====================
+Trigger-Typ  | Beispiel | Beschreibung / Funktionsweise  
+| manual  | 3 | Szene wird bei Klick auf *[Go]* weiter geschaltet. Optionaler Wert: "3" (beim dritten Klick auf [Go] weiter schalten) 
+| follow  | 5s | Wartet bis zum Ende des Einblenden (fade in) der voranstehenden Szene, lässt dann die "follow"-Zeit ablaufen. 
+| wait  | 5s | Die "wait"-Zeit beginnt zu laufen, wenn die Trigger-Zeit der vorherigen Szene abgelaufen ist.  
+| one shot  | 1 |  Gibt die Anzahl der Durchläufe eines Effekts wie zum Beispiel eines Kreis an, nach dem die vorherige Szene ausgefaded werden soll. One Shot Szenen sind grundsätzlich leer. 
+| rtc  | 13:45:00  |  Die Szenen wird zur spezifizierten Uhrzeit eingefadet, hier um 13:45 Uhr. 
+| timecode  | 00:26:05  | Erwartet einen Timecode, sowohl aus einer externen Quelle als auch von der in der Cuelist enthaltenen Audioszene.  
+| beat  | 1 | Weiterschaltung der Szene durch ein Beatsignal, welches vom Speedmaster oder vom Manual Beat / Beat Tool kommt. Die Quelle für Beat-Signal in Cuelist Options unter "Beat Source" 
+|====================
+
+In unserer ersten Show kommen wir allein mit dem manual-Trigger aus. Jannik ist genervt, dass er mit der Maus immer den kleinen GO-Button im Cuelist-Editor treffen muss. Aber Stefan sagt, hier greifen wir mal kurz mit dem Input Assingment vor. Darüber können wir mit Drag&Drop den GO-Button auf die große Leertaste ziehen. Nun ist alles bestens – so bequem hat Jannik noch nie eine Show bedient.
+
+_offen: <Screenshot>_
+
+Cuelist stoppen:
+
+Jannik fällt auf, dass es nach dem Drücken des Stop-Bottons bei einer Cuelist immer eine gewisse Zeit zum „Rückspulen“ der Cues braucht, wie man im Fortschrittsbalken sieht. Er fragt Stefan, was da eigentlich passiert. Warum stoppt die Cuelist nicht einfach und fertig? Stefan antwortet: „Dass beim Zurückfahren beim Stoppen der Cues immer eine Zeit vergeht, hängt mit der eingestellten Release Time zusammen.“
+
+_Später ergänzen: Bei Tracking macht Random Mode keinen Sinn._
+
+NOTE: Nochmal der Hinweis: Es kann sehr sinnvoll sein, Cuelists mit nur 1 Cue zu füllen, wenn man diese z.B. mit einem Executor steuern möchte oder Prioritäten zwischen Cue(list)s ausnutzen möchte. 
+
+=== Grundlicht, Oberlicht hell genug?
+
+Wenn irgendjemand auf der Bühne auftritt, solltest Du immer Grundlicht und Oberlicht zur Verfügung haben. 
+
+Im Beispiel besteht das Oberlicht aus 6 LED-Pars für die Orchesterbeleuchtung am Truss oben (hier geht es nicht darum, die einzelnen Gesichter der Musiker zu erkennen). Das Grundlicht oder Frontlicht wird durch 6 weitere LED-Lampen am Truss gebildet, wovon 2 leistungsstarke Washer sind. Damit wird mit schrägem Licht von oben und vorn gesichert, dass die Chormitglieder inkl. ihrer Köpfe gut zu erkennen sind.
+
+Die Lampen werden also zu zwei Gruppen „Chorlicht“ und „Oberlicht“ zugeordnet. Für jede Gruppe gibt es eine Cuelist, die jeweils nur eine Cue enthält. In dieser Cue wird die Helligkeit auf 100% gesetzt und die Farbe weiß-gelblich eingestellt, damit das Licht nicht so kalt wirkt.
+
+Damit diese Cuelisten unproblematisch genutzt werden können, werden sie jeweils einem Executor zugeordnet. Damit kann man die Cuelist einmalig starten und hat den Vorteil, dass man die Helligkeit ähnlich zu einem Master stufenlos regeln kann während parallel die Haupt-Cueliste abgearbeitet wird.
+
+_zu ergänzen: <Bild mit Executoren>_
+
+== Die Generalprobe und Aufführung
+
+Die Cuelisten der Show sind fertig programmiert, alles ist schon mal im Schnelldurchlauf getestet worden, nun geht es an die Generalprobe. Jana und Jannik sitzen auf sich allein gestellt im Rang im FoH (Front of Head), also hinter dem DMXControl-Laptop.
+
+Es geht los, die Spannung steigt, es sind über 60 Leute im Orchester und auf der Bühne im Chor. Jannik startet die Eingangsszene, die den letzten Zuspätkommern im Publikum noch erlaubt ihren Platz zu finden. Ein Zeichen des Dirigenten, jetzt geht es richtig mit der ersten Cue für den ersten Song ab.
+
+Jana und Jannik erkennen, dass der Chor zu dunkel beleuchtet ist. Was ist zu tun? Jannik zieht den Chor-Executor hoch, Jana will aber ein Update in der Cue, damit morgen bei der Aufführung alles sofort perfekt ist. Jannik ist Informatiker und denkt: „Never change a running system“ – schon gar nicht während einer Aufführung! Es kommt zum ernsthaften Streit, so dass sie fast den Einsatz der nächsten Cue verpassen, wo das gleiche Spiel mit anderen Attributwerten weitergeht. Jannik fühlt sich als Anfänger bei DMXControl3 nicht sicher genug, solche Änderungen live zu machen. Er fürchtet Seiteneffekte, gegenseitige Beeinflussungen der Cues, Überlagerungen, aber auch Programminstabilitäten. Nichts ist peinlicher, als wenn während der Aufführung das Licht ausgeht…
+
+Als er später Stefan davon erzählt, lacht dieser: Wir haben den blind mode, wir haben den Update- Button, wir haben verteilte GUI-Arbeitsplätze – das geht schon alles, aber man muss es halt beherrschen - as erkläre ich Dir später.
+
+Zurück zur Show: Grundsätzliche Änderungen der Cues wurden dann nachträglich durchgeführt. Aber Jannik hat ja immer noch seine Executoren um stets einzugreifen und so lief während der Aufführung alles perfekt ab.
+
+Nur Jannik war ja auch aus seiner Perspektive genervt, dass lichtmäßig wegen der statischen Szenen von Jana so wenig während der Show passiert ist (bis auf drei Ausnahme-Cues). Was niemand auf der Rechnung hatte: Nach der Show hat das Publikum vor Begeisterung getobt und Zugaben gefordert. Dafür gab es keine Vorbereitung und kein Konzept von der Lichttechnik!
+
+Selbst der Dirigent musste spontan entscheiden, welche Songs noch mal angespielt werden. Jannik standen einerseits die Schweißperlen auf der Stirn, andererseits ist das doch die Gelegenheit, live und spontan sein eigenes Lichtkonzept zu realisieren und Jana zu zeigen, wie es auch gehen kann 
+
+image:Kap3_Auffuehrung.jpg[Aufführung]
+
+Abb. 3-6: Während der Aufführung
+
+Jannik hat einfach improvisiert, hier mal einen Chaser auf eine Gerätegruppe ziehen, dort mal live in der Bühnenansicht mittels Farbcontrol geändert oder einen Sinus-Effekt an ein Attribut gehängt. Dazu gibt es in den folgenden Kapiteln mehr Infos.
+
+Über das Ergebnis waren alle happy. Jana und Jannik haben sich angelächelt.

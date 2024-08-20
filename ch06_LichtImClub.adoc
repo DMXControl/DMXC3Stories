@@ -1,0 +1,139 @@
+:imagesdir: ./images/Kap6/
+
+= **Kapitel 6: Licht im Club**
+
+Zufällig ist Stefan in einer Disco für das Licht zuständig. Er hat dort natürlich schon sehr viele Effekte mit DMXControl3 programmiert. Für eine Urlaubsvertretung bittet er Jannik das Geschäft für zwei Wochen zu übernehmen. Jannik bekommt natürlich eine umfangreiche Einführung in das existierende Konzept. Aber einige neue Dinge darf er auch neu einführen… 
+
+== Fit for Cuelist als Profi
+
+Den grundsätzlichen Umgang mit Cuelisten hat Jannik bereits gelernt. Cuelisten bieten verschiedene selbsterklärende Ausführungsmodi (einmalig, wiederholend, …) die man im Cuelist-Editor einstellen kann. Für eine richtige professionelle Show gibt es aber viel mehr Möglichkeiten. Wusstest Du, dass Cuelisten Prioritäten haben können?
+
+Ein Beispiel: Jannik hat die Show komplett programmiert. Nun kommt der Dirigent und möchte einige Lampen doch stärker gedimmt oder sogar ausgeschaltet haben. Um alle Cues zu ändern bleibt keine Zeit mehr. Was tun in der Not? 
+
+Stefan empfiehlt eine neue Gruppe der betroffenen Lampen zu bilden. Dann soll Jannik eine Cueliste für diese Gruppe erstellen, wo nur der Dimmer auf 100% gesetzt wird. Diese kann mit einem Executor gestartet werden. Erstmal passiert aber gar nichts, wenn man den Regler im Executor bewegt, weil ja die Originalcue schon (hohe) Helligkeitswerte gesetzt hat. Wenn nun die neue Cue eine höhere Priorität bekommt (Projektexplorer -> Cuelist suchen -> Eigenschaften), dann tritt der gewünschte Effekt ein. Je größer die Zahl, desto höher die Priorität, es sind auch negative Zahlen erlaubt. Standardmäßig hat jede erzeugte Cuelist die Priorität Null.
+
+image:CueList-Konzepte.png[]
+
+Abb. 6.1: Erweiterte Steuerungsmöglichkeiten von Cuelists 
+
+
+=== Gruppen von Cuelisten
+
+Jannik hat folgenden Anwendungsfall: Wenn ich dort im Softdesk den Toggle-Button "Saal warmes Weiß" drücke, dann starte ich eine Szenenliste, welche meine PAR anspricht und auf weiß stellt. Wenn ich dann den Toggle-Button "Rot" aktiviere, möchte ich, dass der Button "Saal warmes Weiß" und die verknüpfte Cuelist beendet wird.
+
+Aber wie verknüpfe ich das Ganze?
+
+Stefan antwortet: Hast Du die Szenenlisten die nicht zusammen laufen sollen in eine Szenenliste-Gruppe (Cuelist- Group) gepackt ? Die Eigenschaften dieser Szenenliste-Gruppe musst Du dann noch auf Single list running stellen. Dann beendet die neu gestartete Szenenliste die vorherige usw.
+
+Über das Group Handling kann ich dann halt einstellen, wie die Gruppen sich zueinander verhalten sollen. Hierdurch gibt es sehr viele Kombinationsmöglichkeiten, um Effekte und Filter anzuwenden.
+
+Also, das Handling von Cuelist-Gruppen ist Teil des Gesamtdesigns der Show. Genauso, wie man sich vorher überlegen muss, welche Geräte und Lichtstimmungen man haben möchte, sollte man sich vorher einen Plan machen, welche Cuelisten wie miteinander zusammenhängen. Das wird insbesondere durch die verfügbaren Optionen bestimmt:
+
+* Nur eine aus der Gruppe ausführen (alle anderen werden damit gestoppt)
+* Alle aus der Gruppe gemeinsam starten/stoppen
+* Master-Cueliste startet/beendet alle
+
+Jannik möchte gern dafür plausible Beispiele genannt haben. _Stefan: ???_
+
+=== Spezielle Cues
+
+Im Menü „Einfügen“ im Cuelist-Editor gibt es den Menüpunkt „Special-Cue“. Hier kann man u.a. sogenannte Audio-Cues einfügen, wie schon im Kapitel 4.x erwähnt.
+
+Eine andere sehr interessante Form ist das Einfügen von existierenden Cuelisten in die gerade bearbeitete. Aus Informatikersicht kann man sich das wie den Aufruf einer Funktion/Prozedur vorstellen. Man kann also eine existierende Cueliste an beliebigen Stellen immer wieder aufrufen.
+
+_Noch zu erklären: HTP, LTP, LoTP_
+
+
+
+== Matrizen
+
+Bei Matrizen denkt man ja zuerst an große LED-Matrizen wie z.B. eine Video-LED-Wand. 
+
+image:DMXMatrix_Steff_IMG_1123.jpg[LED-Matrix (Quelle: Steff)]
+
+Abb. 6.x: LED-Matrix (Quelle: Steff)
+
+Auch solche „Geräte“ können mittels Adapter letztendlich über DMXControl3 gesteuert werden, so ist es denkbar dass jedes Pixel wie ein RGB-Gerät mit 3 Kanälen gesteuert wird. Für die abgebildete Matrix mit 10 Reihen und 15 Spalten werden also 450 DMX-Kanäle benötigt. DMXControl3 stellt etliche Matrix-Effekte zur Verfügung, die dann direkt für das Matrix-Gerät aktiviert werden können (z.B. Plasma, Text, Random, Boom, usw.). So etwas ist sicherlich auch eine nette Anwendung in einem Club, aber hier soll es um folgenden Anwendungsfall gehen, wenn keine eigentliche LED-Matrix verfügbar ist:
+
+Jana wünscht sich, dass eine Art Kaminfeuer-Atmosphäre im Club herrschen soll. Das könnte man natürlich mit zufälligen Farben im orange-rot-gelb Spektrum irgendwie erreichen, aber würde viel Arbeit machen. Stefan gibt wieder einen wertvollen Tipp: Nutzt einfach den Fire-Matrix-Effekt!
+
+Alle Lampen, die irgendwie RGB können werden zu einer „künstlichen“ Matrix definiert. Hat man 24 Lampen, ist es egal, ob diese in 6x4 oder 2x12 oder 1x24 angeordnet werden. Wenn ein solches virtuelles Matrix-Gerät definiert wurde, kann dafür jeden verfügbaren Matrix-Effekt starten.
+
+Man benötigt dafür das virtuelle Matrix-DDF (unter generic devices), welches entsprechend der gewünschten Dimension konfiguriert wird. Danach wird jeder einzelne Punkt der Matrix mit einem der verfügbaren Geräte gepatcht. Natürlich bleiben die Geräte parallel in ihren sonstigen Gerätegruppen und Cuelisten erhalten. Man hat nur eine zusätzliche Möglichkeit, tolle Effekte zu starten!
+
+Auf jeden Fall ist Jana überrascht, wie schnell der Club in einer Kaminfeuer-Lichtstimmung ist!
+
+Für weitere Details hilft auf jeden Fall dieser Wiki-Beitrag weiter: https://wiki-de.dmxcontrol-projects.org/index.php?title=Lektion_23_Tut3
+
+
+== Input Assignment
+
+_< noch im frühen Entwurfsstatus>_
+
+Die Eingangszuweisung (Input Assignment) hatte Jannik schon kennengelernt, als es ihm zu nervig war mit dem Mausklick die Go-Taste der Cuelist zu treffen. Stefan hat erklärt, dass man diese Aktivität z.B. auch mit der Leertaste des Laptops auslösen kann und hat dazu eine Verbindung (connection) im Input Assigment per Drag&Drop hergestellt.
+
+Genaugenommen ist damit das Konzept des Input Assignments schon charaktersiert. Man definiert sich beliebige Eingangsgrößen (events) um irgendwelche Aktionen zu triggern.
+
+Was gibt es da noch so an Events außer den Tastaturevents vom Laptop? will Jannik wissen. Die Vielfalt der Antwort überrascht ihn: Das können Signale von externen DMX-Pulten sein oder auch MIDI-Signale und OSL-Signale, z.B. aus dem DJ-Bereich. Ebenso können Taktsignale (Beattrigger, Timecodes, Frequenzsignale) zum Starten von Aktivitäten verwendet werden. Es gibt auch „interne“ Signale von DMXControl wie vom Speedmaster, Audioanalyser oder anderen Plugins die man vorteilhaft zum Triggern von Cuelisten verwenden kann. Die verschiedenen Kategorien sind in der folgenden Abbildung beispielhaft sichtbar:
+
+
+[width="100%"]
+|====================
+| image:Kap6_Eingangszuweisung01.JPG[] | image:Kap6_InputAssignment.png[] 
+|====================
+
+Abb. 6.x: Input Assingment mit Input- und Output-Kategorien
+
+Stefan erklärt, dass selbst exotische Events wie Elektrizitäts-Overload oder Drücken des Blackout-Taste zu Events führe können. In den Abbildungen fehlen Softdesks oder Timecodeshows, die dann sichtbar werden wenn es entsprechende Objekte davon im Projektexplorer geben sollte.
+
+Auf der anderen Seite gibt es auf der „Ausgangsseite“, also das was beeinflusst werden soll nicht nur die Cuelisten, sondern auch DMX-Out-Signale oder Master-/Executor-Operationen.
+
+Stefan erklärt, dass damit eine wahnsinnige Flexibilität innerhalb von DMXControl zur Showsteuerung erreicht werden kann. Besonders interessant ist das Input Assignment für die Programmierung der Operation des Softdesks, dazu mehr im folgenden Kapitel.
+
+Nicht immer ist das Input Assignment darauf beschränkt, eine Eingangsgröße einer Ausgangsgröße zuzuweisen. Manchmal möchte man eine Rückmeldung bekommen (z.B. am Softdesk), manchmal muss man die Werte umwandeln bevor sie verarbeitet werden können oder manchmal möchte man eine bestimmte Logik implementieren, wo es Abhängigkeiten oder Zusammenhänge zwischen verschiedenen Signalen geben kann. Stefan sagt: Damit dies nicht in einer Art Programmiersprache ausartet, hat sich das Entwicklerteam für eine grafische „Programmierung“ entschlossen, so wie man sie vielleicht aus anderen Tools wie Node-Red oder vvvv kennt. Die Logik besteht dabei immer aus einer Vielzahl miteinander verbundener Knoten. Jeder Knoten hat auf der rechten Seite Pins für Ausgangssignale und auf der linken Seite Pins für Eingangssignale. Ein Ausgangspin kann potentiell mit einem Eingangspin über eine Linie verbunden werden, so wie wir das bereits bei der Go-Connection gesehen hatten. Natürlich kann ein Ausgangssignal auch Input für verschiedene Eingänge sein, nur man muss immer auf den Typ der Signale achten. 
+
+Die Menge der Eingangspins auf der linken Seite wird auch Eingangs-Hub (Input Hub, auch port) genannt, entsprechend gibt es auch den Ausgangs-Hub (Output Hub) auf der rechten Seite. Es können auch jeweils nur Ausgangs-Hubs mit Input-Hubs verbunden werden.
+
+
+[width="100%"]
+|====================
+| image:Kap6_Eingangszuweisung02_GO.JPG[] |  Für diese einfache Connection wird der Space-Eintrag aus der Spalte Eingänge per Drag&Drop auf den GO-Eingangspin der gewünschten Cueliste in der Spalte Ausgänge geschoben. 
+
+Es entsteht ein Tabelleneintrag dieser Form. Dazu muss man darauf achten, dass das Fenster genügend Platz hat um den rechten Teil wie unten anzuzeigen.
+
+image:Kap6_Eingangszuweisung03_Tabelle.JPG[]
+
+Wie man erkennt können existierende Connections auch deaktiviert werden, falls man sie aus irgendeinem Grunde gerade nicht benötigt. 
+
+|====================
+
+Abb. 6.x: Herstellung einer Connection
+
+Auf diese Weise kann auch ein Netzwerk von verbundenen Knoten entstehen, dessen Komplexität höchstens durch die Sehschärfe des Programmierers beschränkt ist. Die verfügbaren Knoten sind natürlich im Wiki beschrieben. Jeder Knoten kann für verschiedene Eigenschaften parametrisiert werden (Eigenschaften-Menü). Dort kann man z.B. Werteintervalle oder Rechenvorschriften vorgeben.
+
+Jedes Input Assignment Netzwerk wird Connection (Verbindungsset) genannt. Alle verfügbaren Connections können tabellarisch oder in ihrer Grafikansicht angezeigt werden.
+
+image:Kap6_Eingangszuweisung04_Grafik.JPG[]
+
+Abb. 6.x: Grafische Knotenansicht im Input Assignment
+
+Wenn man eine sehr große Anzahl von Connections hat, können diese ähnlich zu Executoren in Bänken organisiert werden. So kann man logisch zusammenhängende Connections in einer Bank zusammenfassen um eine bessere Übersicht zu behalten. Auch ganze Bänke können gezielt ein- und ausgeschaltet werden.
+
+Es gibt verschiede Kategorien von Nodes:
+* Converter (Typwandlung) Farben, Bitmaps, Color to RGB, HSV to Color, Beat to Bool, Framat
+* Logic (Math. und Logikfunktionen, Gatter) FlipFlop, UND, OR, Math, Expression, Timer, Delay, Counter, Compare, BinarySwitcher
+* Wrapper (Informationen über Objekte wie Cues, Devices, Steuern der Objekte)
+* Value Object (erstellt Matrix)
+* Logging (erstellt csv-Datei von Werten)
+
+Detaillierte Informationen gibt es hier:
+https://wiki-de.dmxcontrol-projects.org/index.php?title=Cuelist_(Input_Assignment)_DMXC3
+
+
+== Fit for Softdesk
+
+_.. zu ergänzen…_
+
+Hier werden „sophisticated“ Features vorgestellt im Zusammenhang mit dem Input Assignment, inkl. Rückmeldungen usw.
+* Neben dem Ansprechen von programminternen Funktionen Szenenlisten, Executoren, Master etc. bietet das Eingänge zuweisen auch die Möglichkeit, die verschiedensten Informationen zum Beispiel im Softdesk zu visualisieren
+* Das schließt nicht nur das Ändern des Status eines Buttons ein, ob dieser gedrückt oder nicht gedrückt ist, sondern man kann sich auch Informationen auf Textbasis wie den Namen einer aktuell aktiven Szenenliste oder die BPM-Werte aller im Projekt genutzten Speedmaster anzeigen lassen

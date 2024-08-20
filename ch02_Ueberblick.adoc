@@ -1,0 +1,245 @@
+:imagesdir: ./images/Kap2/
+
+
+= **Kapitel 2: Überblick über DMXControl3**
+
+Jannik muss sich erstmal mit DMXControl3 vertraut machen. Natürlich hat er das Forum auf der Webseite schon besucht und hat sich dort kostenlos registriert. Einige der dort gestellten „Anfängerfragen“ werden in diesem Kapitel besprochen.
+
+== Voraussetzungen
+
+Jannik muss also erstmal seinen Laptop vorbereiten und DMXControl3 (Version 3.3) installieren. Um das Tool auszuprobieren benötigt man erstmal keinen der unterstützten DMX-Transmitter (DMX-Interfaces), da man sich seine Show auch in einem Visualizer oder der Bühnenansicht anschauen könnte.
+DMXControl3 läuft nur unter aktuellen Windows-Versionen (64 bit). Es müssen .NET6 und ASP.NET (jeweils sowohl 32 als auch 64 bit Version) installiert sein. In der Regel wird das mit dem Installer überprüft und installiert.
+
+image::Kap2_Launcher.JPG[DMXControl3 Launcher (ab Version 3.3) ]
+
+Abb.2-1: DMXControl3 Launcher (ab Version 3.3)
+
+Ab DMXControl3 Version 3.3 gibt es den Launcher, der den Start der benötigten Komponenten übernimmt:
+
+* Die GUI ist der sichtbare Teil zur Programmierung und Ausführung der Show.
+* Der Kernel läuft standardmäßig im Hintergrund und ist ein Prozess, der besonders stabil läuft damit der PC stets Signale an das Interface sendet. Er empfängt die Signale über die Umbra-Instanz von einer oder mehreren GUI-Instanzen und sendet diese über das DMX-Interface an die Lampen. Selbst im unwahrscheinlichem Fall des Absturzes einer GUI würde der Kernel weiter die letzten DMX-Signale senden.
+* Der Umbra-Prozess ist meistens verdeckt. Dieser Prozess wird nur im Hintergrund benötigt um die Kommunikation innerhalb DMXControl3 zu gewährleisten. Technisch steckt da das gRPC-Protokoll dahinter, aber das braucht Jannik wirklich nicht zu interessieren.
+
+image::Kap2_DMXC_Architektur.JPG[Architektur]
+
+Abb. 2-2: Architekturbild DMXControl3 (ab Version 3.3 läuft die Kommunikation immer über Umbra)
+
+Das Gesamtsystem startet man mit dem großen Button im Launcher. Als normaler Nutzer hat man nichts mit dem Kernel- und Umbra-Prozessen zu tun, außer dass euch wegen der erforderlichen Client-Server Kommunikation eventuell der Firewall auf dem Rechner dazu um Erlaubnis fragen wird.
+Die beiden internen Prozesse haben „nur“ ein sog. Command Line Interface, d.h. man kann bestimmte Steuerungsbefehle eintippen, siehe Wiki „Kernel DMXC3“. Aber das benötigt Jannik in der Beginner-Phase wirklich nicht.
+
+=== Toolübersicht
+
+Beim Starten des Tools erscheint erstmal ein großes Fenster mit vielen Unterfenstern. Dazu hier ein kurzer Überblick über eine übliche GUI-Konfiguration von DMXControl3. Je nach Anwendung kann man sich völlig unterschiedliche Fenster- bzw. Tool-Konfigurationen erstellen, aber hier erklärt Stefan einige der wichtigsten Funktionen im üblichen Hauptfenster.
+
+image::Kap2_ToolUeberblick.JPG[Toolübersicht]
+
+Abb. 2-1: Toolüberblick 
+
+
+.Toolübersicht
+[width="100%",options="header,footer"]
+[%autowidth.stretch]
+|====================
+| Nr |Erklärung|  Wiki-Begriff
+| 1 | *Programm-Menü.* Hierüber können die verschiedenen Tools aufgerufen werden und Konfigurationseinstellungen vorgenommen werden. Die Menüpunkte werden weiter unten erklärt.  |  
+| 2 | Hauptmenü. Hier sind die wichtigsten Funktionen im Schnellzugriff erreichbar, so z.B. der Programmer- und der Cue-Bereich. Während der Aufführung sind die Buttons „Hervorheben, Blackout, etc.“ sehr nützlich.  |  
+| 3 | *Projektexplorer.* Ähnlich wie beim Windows-Explorer kann man mit dem Projektexplorer alle Objekte der Show managen. Das können Geräte, Bedienelemente, Cues und Dateien sein. Neben der Bühnenansicht (4) das wichtigste Administrationstool!  |  
+| 4 | *Bühnenansicht.* Diese liefert eine 2D-Ansicht und eine ungefähre Visualisierung der Show. Hier können Geräte (-Gruppen) ausgewählt werden um für diese dann Lichtstimmungen (Cues) zu einzustellen. Sie zeigt aber unbedingt nicht das an, was am Ende rauskommt, sondern das, was DMXC3 ausgeben möchte. Sie hört im Gegensatz zu einem Visualizer also nicht auf DMX-Werte.  |  
+| 5 | *Eigenschaften-Controls.* Hier kann man über grafische Controls die wichtigsten Eigenschaften der Lampen beeinflussen: Helligkeit, Farbe, Gobo, Pan/Tilt. Die Auswirkungen sieht man sofort in der Bühnenansicht (4) und in der Gerätesteuerung (6).  |  
+| 6 | *Gerätesteuerung.* Wie bei den Controls (5) können hier die Eigenschaften der Geräte gesetzt werden. Durch eine Zahlen-/Kommandoeingabe kann das aber viel granularer und genauer erfolgen. In anderen Programmen würde dieses Tool vielleicht „Inspector“ genannt werden, da man sich wirklich alle Eigenschaften genau anschauen kann. Weiterhin können tolle Effekte wie Fanning oder Sinuseffekte hier programmiert bzw. eingefügt werden.  |  
+| 7 | *Effekte und Filter.* Diese vorprogrammierten Effekte können im Zusammenhang mit der Gerätesteuerung (6) verwendet werden. Ein beliebtes Beispiel ist der Chaser. Die Effekte kann man in der Regel per Drag&Drop in die Gerätesteuerung (6) ziehen.  |  
+| 8 | *Netz.* DMXControl ist als verteiltes System programmiert. Hier hat man einen Monitor für den Netzwerktraffic. <Wann wird es kritisch??>  |  
+| 9 | Projektadministrations-Menü. Hier können allgemeine Projektmanagement-Aufgaben aufgerufen werden  |  
+|  10| *Diverse Reiter.***** DMXControl erlaubt es, beliebige Fensteranordnungen zu gestalten. Diese Reiter-Anordnung ist eine platzsparende Möglichkeit, viele Fenster/Tools gleichzeitig zugreifbar zu machen.  |  
+| 11 | *Preset-Panel* (in Abb. nicht zu sehen): Presets sind wie Templates für bestimmte Eigenschaften, die man in mehreren Cues nachnutzen kann um immer konsistente Farben oder andere Eigenschaften zu generieren.  |  
+|====================
+
+=== Das Fenstersystem
+
+Aufgrund der großen Anzahl von Tools haben nicht alle gleichzeitig Platz auf dem Bildschirm. Außerdem benötigt jeder Nutzer nach Anwendungsfall sowieso unterschiedliche Fenster/Panels. Je nachdem, ob Jannik nur mit dem Laptop arbeitet oder 2 oder 3 zusätzliche Monitore zur Verfügung hat, wird er seine eigene GUI-Konfiguration anders wählen. Eine individuell konfigurierte Benutzeroberfläche kann auch im DMXControl-Showprojekt gespeichert werden, so dass beim nächsten Projektaufruf die gleiche Fensteranordnung wieder erscheint.
+
+Prinzipiell werden die Tools über das Programmmenü aufgerufen. Sie können als freischwebende Fenster agieren, einen eigenen Bereich bekommen oder an existierende Fenster angedockt werden, wo sie dann als neuer Reiter erscheinen. Prinzipiell zeigt der hellblaue Bereich beim Verschieben des Fensters, wo das neue Panel landen würde. Nach kurzer Übung schafft es Jannik jedes Panel wie gewünscht anzuordnen. Er muss dazu den Mauszeiger über den erscheinenden transparenten Pfeil ziehen. 
+
+NOTE: Diese Panel-Anordnung klappt allerdings manchmal nur auf dem Hauptmonitor. (Sollte aber nicht so sein, das hängt scheinbar von der Grafikkarte ab.)
+
+Ein nicht mehr benötigtes Panel kann Jannik mit dem X-Symbol (jeweils rechts oben im Panel) entfernen. In der Regel füllen dann die restlichen Panels den freigewordenen Platz automatisch aus.
+
+*Wiki:* Panel-Konzept DMXC3
+
+=== Projektexplorer
+
+Stefan erklärt Jannik den eigentlichen Startpunkt des Projektes: Der Projektexplorer übernimmt in DMXControl3 die zentrale Verwaltung des gesamten Projekts. Man kann hier alle im Projekt verwendeten Objekte wie Geräte, Cuelisten, Bühnenansichten, Timecodeshows, Dateien etc. organisieren, neue hinzufügen oder nicht mehr benötigte löschen. Für eine bessere Übersicht wurden, ähnlich wie im Windows Explorer auch, Ordner angelegt und einzelne Objekte können darin einsortiert werden. Die Menüleiste des Projektexplorers oder die rechte Maustaste bieten einfachen Zugriff auf verschiedene Funktionen der Objekte.
+
+Die Struktur des Projektbaums (siehe Ziffer 3 in Abb. 2.1) mit seinen einzelnen Zweigen ist in DMXControl3 fest vorgegeben und kann nicht geändert werden. Jeder Zweig ist ein Ordner und strukturiert auf diese Weise das Projekt, so dass zum Beispiel Cuelisten immer im Ordner Cuelisten zu finden sind. Einige Objekte kann man nicht über die Bühnenansicht erzeugen, sondern man muss sie immer im Projektexplorer erstellen (z.B. Executoren, Softdesks). In dieser Verzeichnisstruktur werden sich später auch andere Objekte wie mp3-Dateien, Hintergrundfotos usw. finden.
+
+Jannik kann sich also hier stets einen Überblick verschaffen, welche Objekte in der Show existieren. Es gibt vielleicht eine Ausnahme: Die einzelnen Cues sind hier nicht zu finden, diese kann man auch niemals direkt aufrufen, sondern immer nur in ihrem „Container“, der Cuelist.
+
+<Bild mit gefülltem Projektexplorer ergänzen>
+
+Jannik ist begeistert, dass hier viele Operationen über Drag&Drop realisiert werden können, z.B. das Hinzufügen von Geräten zu Gerätegruppen, Cuelisten zu Cuelistgruppen, Audiofiles zu Timecode-Tracks, aber auch vieles mehr. Was Gerätegruppen sind, erklärt Stefan im nächsten Abschnitt.
+
+*Wiki:* Project Explorer DMXC3
+
+== Grundlegende Konzepte zum Verständnis
+
+=== Gruppen – Sind Deine Lampen schon in Teams organisiert?
+
+Stefan sagt: *Axiom 1:* Gewöhne Dir von Anfang an, immer im Gruppenkonzept zu denken!
+
+Gruppen-Unterstützung ist neben HAL und dem Fanning (Kap.x.x) eines der stärksten Features von DMXControl3. Wenn Du Lampen in Gruppen anordnest, kann Du zukünftig Effekte über eine solche Gruppe programmieren. Du kannst existierende Gruppen um neue Lampen erweitern und die bereits programmierten Effekte werden automatisch auf die neuen Mitglieder erweitert. Das ist irgendwie Magic… Sollte mal ein Gerät kaputtgehen oder ausgetauscht werden müssen, ersetzt Du es einfach in dieser Gruppe. Das tollste ist, das neue Gerät kann sogar einen anderen Typ haben und DMXControl3 versucht trotzdem das Beste herauszuholen, so dass das neue Gerät sich wie die anderen Gruppenmitglieder verhält. Man kann hier also von echtem Teamwork reden und DMXControl3 unterstützt Vielfalt in den Geräten! Wenn man in Vornherein die Show über Gruppen programmiert, ist man also viel flexibler als wenn man eine Cue über einzelne Geräte definiert! Wie im täglichen Leben: Gruppenarbeit ist toll...
+
+Aus diesem Grund kann es sogar sinnvoll sein, auch für eine einzelne Lampe eine Gruppe anzulegen. Wir werden auch sehen, dass eine Lampe auch zu mehreren Gruppen gehören kann.
+
+Die Organisation der Gruppen kann über mehrere Szenarien erfolgen:
+
+* beim Hinzufügen der Geräte im Setup-Menü
+* in der Bühnenansicht (Markieren der Geräte und Kontextmenü)
+* im Projektexplorer (Drag&Drop in Gerätegruppen)
+
+*Wiki:* Device_Group_DMXC3 
+
+
+=== Cues als atomarer Baustein jeder Show
+
+Stefan erklärt, dass eine Show irgendwie immer eine Abfolge von Cues ist. Mit Cue bezeichnet man klassisch eine Lichtstimmung, also im Theater z.B. die konkrete Beleuchtung der Schauspieler oder des Bühnenhintergrundes. Im einfachsten Fall wird die Lichtstimmung (Cue) in der Bühnenansicht eingestellt, dazu kann man verschiedene Controls oder das Fenster der Geräteeigenschaften verwenden. Die aktuellen Werte gehen normalerweise sofort an den Ausgang. Sie werden aber auch im Programmer zwischengespeichert. Im Programmer kannst Du sehen, welche Änderungen Du an welchen Geräten und welchen Eigenschaften gemacht hast und diese Änderungen ggf. auch wieder abwählen. Wenn alles OK ist, speicherst Du es in einer neuen Cue. Bevor die Cue einer Cuelist hinzugefügt wird öffnet sich der Programmer Filter, wo man letzte Überprüfungen und Korrekturen machen kann. Es ist aber auch vorher im Programmer selbst möglich, bestimmte Werte für bestimmte Funktionen wieder zu entfernen. Erst dann werden die Werte tatsächlich in einer Cue gespeichert. Damit hast Du die aktuelle Lichtstimmung eingefangen. Das machst Du nun genauso mit der gewünschten nachfolgenden Cue: neue Cue einstellen, im Programmer (Filter) kontrollieren, speichern, fertig.
+
+Eine Cue kann niemals selbständig existieren. Eine Cue benötigt immer einen Container – die Cueliste -  in dem sie aufbewahrt wird. Ebenso kann man eine Cue nie direkt aufrufen, sondern nur die Cueliste, in der sie enthalten ist.
+
+Damit später beim Abspielen der Cuelist alles genauso aussieht, musst Du das *Tracking* deaktivieren. Warum es standardmäßig angestellt ist, erklären wir später im Abschnitt x.x...
+
+
+=== DMX-Ausgabe – Was passiert dabei wirklich?
+
+Alles schön und gut, denkt Jannik. Aber wie hängt das nun alles mit dem Ziel zusammen, meine Lampen in der Show zu steuern? Was passiert eigentlich grundsätzlich bei der DMX-Ausgabe und welche Tools spielen da rein?
+
+Ach, ich hab‘ da etwas, sagt Stefan. Hier ist ein Bild, wo ich mal für Studenten des Lichtsteuerungskurses aufgemalt habe, wie das alles zusammenhängt:
+
+image::Kap2_DMXAusgabe_Gesamtsicht.JPG[DMX-Ausgabe]
+
+Abb. 2-x: Signalfluss in DMXControl3
+
+Jannik ist erstmal erschlagen von der Komplexität, aber die meisten Begriffe wurden ja schon auf den früheren Seiten eingeführt. Da musst Du notfalls nochmal nachlesen, sagt Stefan! Beachte, dass die Änderungen in der Kanalübersicht nur direkt in die Kernel-Ausgabe gehen, aber nicht für die Cue-Programmierung benutzt werden können, was Absicht vom Programmierteam ist. Ansonsten würde man das HAL-Konzept unterlaufen. Die Kanalübersicht ist nur für Prüf- und Testoperationen gedacht.
+
+WARNING: Warnung von Stefan: Stelle niemals bei der Cuelist-Erstellung irgendwelche Werte über die Kanalübersicht ein. Außer beim Testen von Geräten oder bei der Fehlersuche gilt: Hände weg von der Kanalübersicht! Überprüfe vor der Show, dass in der Kanalübersicht alle Werte auf Null gesetzt wurden (ab DMXControl 3.3 werden dazu entsprechende Warnungen gesendet).
+
+Die wirklich neue Information für Jannik ist nur, dass der Programmer so zentral im Fokus steht. Zwei Punkte sind hier hervorzuheben:
+
+*Axiom 2:* Alles was im Programmer steht, geht direkt an die Ausgabe (blauer Pfeil) und an die Bühnenansicht. Du kannst den Inhalt des Programmers aber über den Button „Programmer leeren“ bereinigen, dann bleibt für die Ausgabe nur das übrig, was gerade durch die aktuellen Cuelists ausgegeben wird.
+
+*Axiom 3:* Eine neue Cue erzeugt man ausschließlich dadurch, dass das, was im Programmer steht, gespeichert wird. Es gibt keinen anderen Weg, eine „normale“ Cue zu erzeugen. (Ausnahmen wie Spezialcues für Audio usw. erklärt Stefan später.)
+
+Jannik erkennt aus der Abbildung, dass sich der Inhalt des Programmers mit den Werten aus den gerade aktiven Cuelisten überlagern können. So kann es nach „manuellen“ Eingriffen in die laufende Show nützlich sein, zwischendurch den Programmer zu leeren damit nicht die folgenden Cues betroffen sind.
+
+Jannik ist nun vieles klarer geworden, aber eine wichtige Frage hat er noch im nächsten Abschnitt, bevor es an die erste Show geht..
+
+=== Programmer - Was programmiert dieser eigentlich?
+
+Stefan sagt doch: In DMXControl3 führen alle Wege über den Programmer. Hier werden alle Werte zentral zusammengeführt und zwischengespeichert, die durch das Einstellen einer Lichtszene mit Hilfe der Gerätesteuerung (Device Control) oder über die Steuerungsfenster (Control Panel) gesetzt werden. Nur Werte, die im Programmer aufgeführt sind, kann man in einer Szene (Cue) speichern.
+
+Im Programmer kann Jannik in Prozentzahlen, Farbdarstellungen usw. nochmal prüfen, was eben passiert ist. Im Gegensatz zur Bühnenansicht, wo alle aktuellen Werte bzw. Ausgaben angezeigt werden, sieht er im Programmer nur die letzten Änderungen.
+
+image::Kap2_Programmer.JPG[Programmer]
+
+Abb. 2-x: Der Programmer, Farbe und Dimmerwerte sind für 6 Lampen verändert 
+
+Diese Änderungen kann er nun ggf. korrigieren - mittels Gerätesteuerung oder -Controls oder direkt im Programmer Filter bestimmte Attribute deaktivieren. Wenn alles OK ist, speicherst er es halt in einer neuen Cue. 
+
+=== Programmerfilter
+
+Den aktuellen Inhalt des Programmers kann man sich über den entsprechenden Menüpunkt anschauen, man kann auch alle gesetzten Werte löschen oder nur einzelne Attribute oder Geräte bei der Auswahl herausnehmen. Der Button „Programmer leeren“ macht erwartungsgemäß was sein Name ausdrückt: Alle notierten Änderungen werden gelöscht.
+
+Stefan erläutert Jannik ein Beispiel, bei dem sich Anfänger manchmal wundern: Wenn man beim Abfahren einer Cuelist nebenbei Änderungen in Lichtstimmungen macht, gehen diese sofort in den Programmer und damit zusätzlich zu den DMX-Werten aus der aktuellen Cue an den Kernel. Wenn man nun zur nächsten Cue schaltet, bleiben die Werte aus dem Programmer trotzdem noch am Ausgang. Wenn das nicht gewünscht ist, musst Du eben den Programmer leeren.
+
+Stefan ist noch nicht fertig, er sagt zu Jannik: Der Programmer spielt auch eine große Rolle beim Ändern von bereits erstellten Cues. Wenn Du eine bereits vorhandene Szene in den Programmer lädst (Menüpunkt: “Im Programmer editieren“), werden alle zuvor enthaltenden Werte im Programmer durch die Werte aus der Cue überschrieben. Nun kann man wie gewohnt die Cue-Werte anpassen und das Ergebnis abspeichern.
+
+Nun klickt es endgültig bei Jannik: Der Programmer programmiert im eigentlichen Sinne gar nichts, sondern es ist eher ein Sammler aller der seit dem letzten Löschen oder Speichern einer Cue geänderten Werte. Programmieren muss er dagegen mit der Gerätesteuerung, den Gerätecontrols und den Effekten. 
+
+IMPORTANT: Das Speichern einer Cue löscht die Werte nicht aus dem Programmer. Sie werden nur im Programmer Filter nicht mehr vorausgewählt.
+
+Der Name Programmer ist nur ein historisches Relikt aus Zeiten der Pulte, wo es keine anderen Möglichkeiten gab, die Werte für die Ausgabe zu sammeln.
+Wir müssen später aber Stefan noch fragen, wofür man die Schnappschuß-Funktion im Programmer verwendet…
+
+=== Executoren vs. Master
+
+Wenn wir schon bei historischen Relikten sind, dann will Stefan noch schnell die Rolle von Executoren und Mastern als weitere Bedienelemente zur Showsteuerung klären (siehe Begriffe Kap. 1). 
+
+Jannik hat gesehen, dass man damit den Ablauf von Cuelisten steuern kann (siehe Abb. 2-2: Signalfluss), aber nicht muss, weil das auch über andere Wege geht. Sowohl Master und Executoren werden traditionell mit Reglern (Slider, Fader) dargestellt und bedient. Beide Typen kommen eigentlich nur beim Ausführen der Show zum Einsatz, sollten aber während der Showprogrammierung geeignet konfiguriert werden.
+
+image::Kap2_Master.JPG[Master]
+
+Abb. 2-x: Master in DMXControl3 
+
+Die Master können global die Helligkeit von Effekten beeinflussen. Das gilt unabhängig davon, welche Cuelists gerade ausgeführt werden. Wenn im Effekt ein Speedmaster referenziert wird kann auch die Effektgeschwindigkeit geregelt werden.
+
+Executoren dagegen sind in der Regel mit einer Cuelist verknüpft, deren Ablauf man steuern will (Stefan: Mit DMXC3.3 ist diese Aussage nicht mehr Stand der Dinge. ??). So kann man sich nach Bedarf diverse Executoren ggf. auch in verschiedenen Bänken (Pages) erstellen. Die Zuordnung der Cues passiert wieder über Drag&Drop im Projektexplorer, nachdem dort entsprechende Executoren erstellt wurden. Reicht die Standard-Bank nicht aus, kann man im Projektexplorer weitere Bänke anlegen.
+
+_Warum man Executoren auch mit Mastern verknüpfen kann, ist eine gute Frage, die Stefan vielleicht im nächsten Live-Meeting beantworten kann_
+
+_Zu ergänzen: Jannik hat im Forum gelesen, dass es nun auch Color Master und Parameter Master gibt. Was zum Teufel ist das nun schon wieder? Gerade bei Parameter Mastern hat er nicht mal eine geringste Idee…_
+
+=== Fit for Executoren
+
+_Hier sollen „Expertentipps“ zur Verwendung von Executoren gesammelt werden_
+
+
+== Das erste Beispiel-Projekt
+
+Nach dem ganzen theoretischen, nervigen und möglicherweise unsinnigen Vorgeplänkel will Jannik nun endlich ein kleines Beispielprojekt erstellen um die Tools zum ersten Mal auszuprobieren (eine Nachahmung für den Leser ist dringend empfohlen, das Projekt wird aber auch im github nachgeliefert!).
+
+In einem Partykeller sollen 6 LED-PARs installiert werden. Jannik entscheidet sich für dieses Gerät namens „LED PARty Spot“ vom Hersteller Eurolite:
+
+image::Kap2_LEDPARty_Thomann2023.JPG[LEDParty]
+
+Abb. 2-x: Eurolite LED PARty TCL Spot (Quelle: Thomann.de)
+
+Der Gerätename ist übrigens ein nettes Wortspiel, weil darin PAR auftaucht, was in der Lichttechnik der allgemeine Name für Scheinwerfer ist (https://de.wikipedia.org/wiki/PAR-Scheinwerfer). In der Anleitung findet er die Information, dass das Gerät im 6-Kanal-Modus arbeitet:
+
+image::Kap2_LEDPARty_6Kanal.JPG[Kap2_LEDPARty_6Kanal]
+
+Abb. 2-x: DMX-Betrieb LED PARty (Quelle Handbuch: steinigke.de)
+
+Jannik startet mit einem neuen Projekt in der Projektadministration:
+
+image::Kap2_Projektadministration.JPG[Kap2_Projektadministration]
+
+Abb 2-x: Anlegen des ersten Testprojektes
+
+Im nächsten Schritt fügt er 6 Geräte der gewählten LED PARty Lampe hinzu, z.B. in der Bühnenansicht. Alle Lampen organisiert er gleichzeitig in einer Gruppe namens „Group LED PARty“. Alle Namen können natürlich beliebig geändert werden. Glücklicherweise hat der hilfsbereite Nutzer Kleena schon ein passendes DDF in der DDF-Library erzeugt. Über die Suche mit dem Buch-Button ist es schnell unter dem Hersteller Eurolite gefunden und kann ausgewählt werden.
+
+image::Kap2_GeraetHinzufuegen_LEDParty.JPG[Kap2_GeraetHinzufuegen_LEDParty]
+
+Abb 2-x: Anlegen der Geräte
+
+Nun macht Jannik die erste Kontrolle in der „Kanalübersicht“. Alle Lampen (in der Darstellung unten sind wegen fehlender Scrolling-Möglichkeit im Screenshot nur die ersten vier sichtbar) sind dort ordentlich angelegt und er kann mit den linken Slider testen, ob alle Kanäle richtig funktionieren, indem er damit die DMX-Werte in der Ausgabe direkt beeinflusst. Wie bereits erwähnt: Diesen Slider in der Kanalübersicht niemals zum Programmieren von Cues verwenden!
+
+image::Kap2_KanalUebersicht.JPG.[KanalUebersicht]
+
+Abb 2-x: Kanalübersicht
+
+Schließlich schaut sich Jannik die Darstellung in DMXControl3 an. Mit den Farb- und Intensitäts-Control-Fenstern werden die Lampen manuell an- und ausgeschaltet und die Farbe vorgegeben. Lumos im Intensitäts-Control bedeutet, dass die höchste Helligkeit gewählt wird. Diese Änderungen werden sofort in der Bühnenansicht angezeigt (und sind natürlich im Programmer verfügbar). Die in der Abbildung zu sehenden Navigations- und Zoom-Icons können mit der Kamerasteuerung ein- und ausgeblendet werden.  Die Lampen können in der Bühnenansicht einzeln oder mittels ihrem Gruppen-Icon ausgewählt werden
+
+image::Kap2_TestProjekt01_6grueneLEDPars.JPG[Testprojekt LEDParty]
+
+Abb. 2-x: Die ersten 6 LED-PARs werden bedient.
+
+Die standardmäßig eingeblendeten Controls für Position und Gobo machen bei den verwendeten Lampen keinen Sinn und sind daher ausgegraut, da DMXControl3 ja mitdenkt. In dieser Abbildung ist der Projektexplorer als eigenständiges Fenster eingeblendet. Dort sieht man, dass es 6 Geräte und eine Gruppe für die 6 Geräte gibt. Das Gerätesteuerungsfenster auf der rechten Seite wurde so aufgeklappt, dass alle Eigenschaften und aktuellen Attribut-Werte zu sehen sind, insbesondere die Farbkanäle. Auch in diesem Fenster können die Werte durch direktes Eintippen geändert werden.
+
+Klicke wie Jannik dort einfach mal etwas rum. Es kann ja nichts kaputtgehen! 
+
+Öffne das Fenster mit den Mastern und schaue, wo schon mal standardmäßig etwas passiert. Nicht zuletzt, einfach mal einen Effekt auf den Dimmer oder die Farben in der Gerätesteuerung per Drag&Drop ziehen. Zu den Effekten kommen wir aber später im Kapitel 4. Sie können im Gerätesteuerungspanel über das X-Zeichen auf der rechten Seite oder die Entf-Taste auch wieder gelöscht werden. 
+
+== Generelle Entscheidungen
+
+Dieses Beispiel war nun erstmal für den absoluten Einstieg gedacht. Welche weiteren Features DMXControl3 liefert werden Jana und Jannik nun anhand diverser Szenarien erforschen:
+
+* Welche Art der Veranstaltungen (z.B. Theater oder Disco) werden unterstützt?
+* Wieviel sollte vorab programmiert werden? Oder wird alles live gesteuert?
+* Welche Programmier- und Steuerungsmöglichkeiten hat man als Anfänger oder als Experte oder etwas dazwischen?
+* Was will ich eigentlich? Kann DMXControl3 alles tun, was letztens in der Show beim Konzert im Olympiastadiongesehen zu sehen war? 
+* Wie gestaltet man das Spiel mit Farben, wie aufwändig sind bestimmte Lichteffekte?
+* Was ist dieser Timecode, wann braucht Jannik diesen? 
+* usw., usw.
+
+Stefan und das DMXControl-Team wünschen nun den beiden und euch viel Spaß bei der Reise durch das DMXControl-Universum!
+
+
