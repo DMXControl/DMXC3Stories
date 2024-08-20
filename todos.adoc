@@ -13,13 +13,14 @@ dmxcontrol-projects.org
 :numbered:
 
 [%hardbreaks]
-NOTE: Diese ToDo-Liste wirdspäter in git Bugreports überführt, in Klammern steht die Priorität.
+NOTE: Diese ToDo-Liste wird später in git issues überführt, in Klammern steht die Priorität.
   
 == Technische Probleme mit AsciiDoc
 
 * TP01(2): harte Leerzeichen in Tabellen einfügen
 * TP02(2): Nummerierung der Kapitel verbessern
 * TP03(1): Nummerierung der Abbildungen korrigieren
+* TP04(2): Inkompatibilität von AsciidocFX und github-Preview beseitigen
 
 == Inhaltliche Ergänzungen Add-ons DMXControl
 
