@@ -1,0 +1,37 @@
+:imagesdir: ./images/
+
+
+
+
+= DMXControl 3 Stories - To Do's
+dmxcontrol-projects.org
+
+:doctype: book
+:encoding: utf-8
+:lang: de
+:toc: left
+:numbered:
+
+[%hardbreaks]
+NOTE: Diese ToDo-Liste wirdspäter in git Bugreports überführt, in Klammern steht die Priorität.
+  
+== Technische Probleme mit AsciiDoc
+
+* TP01(2): harte Leerzeichen in Tabellen einfügen
+* TP02(2): Nummerierung der Kapitel verbessern
+* TP03(1): Nummerierung der Abbildungen korrigieren
+
+== Inhaltliche Ergänzungen Add-ons DMXControl
+
+* IE01(1):Softdesk-Kapitel einfügen
+* IE02(1):Input Assignment ausführlicher darstellen
+* IE03(2):MIDI-Kapitel hinzufügen
+* IR04(2): LTP, HTP
+
+== Inhaltliche Korrekturen (Bugs)
+
+* K001: 
+
+
+
+<<<
