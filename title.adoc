@@ -1,4 +1,4 @@
-:imagesdir:./images/Allg/
+:imagesdir: ./images/Allg/
 
 
 = DMXControl 3 Stories
