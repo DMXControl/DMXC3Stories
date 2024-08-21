@@ -5,7 +5,55 @@
 
 == Presets
 
-== Fit for Effects als Profi	
+Bei einer richtig großen ansprechenden Show kommt man um das Konzept der Presets nicht herum. Stefan sagt zwar, für den ersten Einstieg in DMXControl 3 sollten Presets erst einmal außer Acht gelassen werden. Hier empfiehlt sich, mit Cuelists zu arbeiten, welche dann eine oder mehrere Cues enthalten. 
+
+Was sind nun Presets? Ähnlich wie in Cues werden dort Geräteeigenschaften gespeichert. Es gab schon Nutzer, die aufgrund Verständnisprobemen von Cues ihre Lichtshow nur mit Presets gesteuert haben - aber das ist definitiv nicht im Sine des Erfinders.
+
+NOTE: Presets sind nicht dazu gedacht, sie während der Show direkt aus dem Preset-Fenster aufzurufen (anstelle Cuelisten starten).
+
+Vielmehr sind Presets der zentrale, programmweite Speicher für in mehreren Cues verwendete Geräteeigenschaften. WEr ein wenig Informatik-affin wie Jannik ist, kann sich darunter „Makros“, „Templates“, oder halt Voreinstellungen vorstellen, die in vielen Cues
+wiederverwendet werden sollen.
+
+Wofür man das benötigt erklärt Stefan folgendermaßen: Mehrere Cues können sich auf die gleichen Presets beziehen. Wenn nun Jana wieder mal kurzfristig Änderungswünsche hat, muss man die Änderungen nur an einer Stelle vornehmen (nämlich im Preset), aber das hat Auswirkungen auf alle Stellen (Cues), wo das Preset verwendet wird. Damit werden die Cues praktisch aktualisiert. Er gibt ein Beispiel: Man kann zuhause eine Show vorbereiten und dann vor Ort mit den echten Lampen nur noch die Presets an die realen Lampen-Werte anzupassen ohne dass man nochmal seine Cues editieren muss. 
+
+*Wiki:* Preset_DMXC3
+
+Übrigens kam Janik der Begriff schon von den Preset-Pulten bekannt vor, aber der wird dort in einem anderen Sinne verwendet:
+
+Eine Voreinstellung (Preset, auch Palette) ist die Möglichkeit, während der Ausgabe einer Lichtszene bereits eine zweite auf dem Pult einzustellen, um nach Ende der Szene sofort auf die andere überblenden zu können. 
+
+image:Kap7_Faderbank.jpg[]
+
+Abb. 7-1: "Historische" Faderbank für Presets
+
+Um dies zu ermöglichen, müssen bei Pulten für jeden Kanal mindestens 2 Regler vorhanden sein. Meistens sind diese in 2 Reihen bzw. Bänken untereinander angeordnet. Die erste Reihe ist dann für das erste, die zweite für das zweite Preset. 
+Mit ein oder zwei Crossfadern wird zwischen den beiden Presets überblendet.
+
+Was sind nun typische Anwendungsbeispiele für Presets bei DMXControl?
+Es handelt sich dabei um vorher eingegebene Helligkeiten, Positionen oder andere Parameter die auf beliebige Geräte angewendet werden können, so kann man z.B. Standardfarben an Presets vereinbaren. Ebenso können Grundpositionen von MovingHeads („Nullstellung“ ausrichten, "Himmelsposition", etc.) als Presets definiert werden oder man fokussiert  die Lampen auf den Schlagzeuger oder die typische Sängerposition. Selbst
+bestimmte Lichteffekte (Kegel, Kreis, etc.) können als Preset definiert werden. Nun wird es Jannik klar, dass man damit wahnsinnig viel Arbeit in größeren Shows sparen kann. Man muss nicht für jede Cue, die z.B. den Sänger beleuchten soll diese Einstellungen neu machen!
+
+image:Kap7_PresetsDMXC3.jpg[]
+
+Abb.7-1: Preset-Fenster in DMXControl 3
+
+Häufig benutzte Positionen der Scanner/Movingheads müssen so nicht jedes Mal neu eingegeben werden. Bei der Erstellung einer Cue verwendet man die Presets, als ob man eine Geräteeigenschaft anwenden will, statt Farbe auswählen z.B. Preset auswählen. Einfach Gerät(e) oder Gruppe selektieren, Preset anwenden indem es ausgewählt und auf die Geräte gezogen wird, Cue abspeichern und fertig!DMXControl 3 merkt sich, dass in dieser Cue ein Preset steckt.
+
+Das ist das Basiswissen, aber kann es noch ein wenig komplizierter haben, denn Stefan erklärt die 3 Arten von Presets:
+
+* **Reference Preset**Das Preset wird einfach in eine Cuelist gezogen, und wird dadurch zur "globalen Szene", ergo an dieser Stelle wird das Preset 1:1 wie eine Szene verwendet. 
+* **Device Preset**Das Preset wird auf ein bzw. mehrere Geräte bzw. Gruppen gezogen und wird nur auf den Geräten angewendet, welche auch im Preset gespeichert sind.
+* **Property Preset**Die Eigenschaftswerte des Presets werden verwendet. Dabei spielen die Geräte keine Rolle. Jedes selektierte Gerät mit den passenden Eigenschaften wendet den Wert des Presets an. 
+
+
+Stefan erwähnt noch, dass Werte über den Programmer gefiltert werden können und in einer Cue können auch mehrere Presets gleichzeitig verwendet werden.
+
+== Fit for Effects als Profi
+
+tbd.
+Jana möchte für die finale Show besonders eindrucksvolle Effekte haben, denn inzwischen hat sie ihren klassschen Theaterhintergrund verlassen...
+
+image:MH_Schwenken_Effekt_Trapezoid.JPG[]
 
 == Das finale Projekt	
 

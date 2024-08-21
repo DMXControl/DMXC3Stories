@@ -169,7 +169,7 @@ Nun gibt es für jede Cue in der Cueliste noch viele Parameter, die mit dem Trig
 
 IMPORTANT: Der Lebenszyklus einer Cue kann bei der Showgestaltung ausgenutzt werden. 
 
-image:Kap3_CueLebenszyklus.png[Lebenszyklus einer Cue]
+image:Kap3_CueLebenszyklus.jpg[Lebenszyklus einer Cue]
 
 Abb. 3-5: Lebenszyklus einer Cue
 
@@ -181,7 +181,7 @@ Es gibt verschiedene Trigger (manual, one shot, follow,..). Wie der Name es verm
 [width="100%",options="header,footer"]
 [%autowidth]
 |====================
-Trigger-Typ  | Beispiel | Beschreibung / Funktionsweise  
+| Trigger-Typ  | Beispiel | Beschreibung / Funktionsweise  
 | manual  | 3 | Szene wird bei Klick auf *[Go]* weiter geschaltet. Optionaler Wert: "3" (beim dritten Klick auf [Go] weiter schalten) 
 | follow  | 5s | Wartet bis zum Ende des Einblenden (fade in) der voranstehenden Szene, lässt dann die "follow"-Zeit ablaufen. 
 | wait  | 5s | Die "wait"-Zeit beginnt zu laufen, wenn die Trigger-Zeit der vorherigen Szene abgelaufen ist.  

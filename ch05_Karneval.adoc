@@ -2,7 +2,7 @@
 
 = **Kapitel 5: Karneval**
 
-Dieses Kapitel betrifft Veranstaltungen wie Karneval, Musical usw. wo man eine hohe Kombination von vorbereiteten Cuelisten, Timecodelisten und Live-Eingriff hat. In Ergänzung zu den vielen Möglichkeiten aus den vorigen Kapiteln werden hier super Dinge vorgestellt, die wirklich nur mit einer computerbasierten Lichtsteuerung möglich sind. So werden Effekte nach mathematischen Algorithmen auf diverse Lampen automatisch umgerechnet. Da der Computer die Berechnungen für die einzelnen Lampen-Eigenschaften macht minimiert sich der Programmieraufwand dadurch dramatisch! Wo man ansonsten zig-Cues benötigen würde, kommt man nun mit wenigen Cues aus um eindrucksvolle Lichtstimmungen zu zaubern.
+Dieses Kapitel betrifft Veranstaltungen wie Karneval, Musical usw. wo man eine hohe Kombination von vorbereiteten Cuelisten, Timecodelisten und Live-Eingriff hat. In Ergänzung zu den vielen Möglichkeiten aus den vorigen Kapiteln werden hier super Dinge vorgestellt, die wirklich nur mit einer computerbasierten Lichtsteuerung möglich sind. So werden Effekte nach mathematischen Algorithmen auf diverse Lampen automatisch umgerechnet. Da der Computer die Berechnungen für die einzelnen Lampen-Eigenschaften macht, minimiert sich der Programmieraufwand dadurch dramatisch! Wo man ansonsten zig-Cues benötigen würde, kommt man nun mit wenigen Cues aus um eindrucksvolle Lichtstimmungen und -Effekte zu zaubern.
 
 Als eindrucksvolles Beispiel erklärt Stefan zuerst verschiedene Anwendungen für das Fanning. Denn Jannik möchte wissen, wie man es programmiert, dass die Beams von Moving Heads fächerförmig aufgestellt werden, … und am besten noch mit einem gleichförmigen Farbverlauf – das wäre doch cool!
 
@@ -16,27 +16,28 @@ Abb. 5-1: Fanning von Farben und Pan-Position
 
 Noch genauer ausgedrückt:  Die ausgegeben Werte für die Eigenschaft werden mathematisch „gleichverteilt“ und passen sich automatisch an die ausgewählten Geräte an (z.B. innerhalb einer Gruppe). Das Fanning ist also vorteilhaft mit Gerätegruppen zu verwenden. Je nach Anzahl der enthaltenen Geräte werden die Werte intervallmäßig aufgeteilt. Dies funktioniert für fast alle Eigenschaften, also z.B. Helligkeit, Farbe, Position. Die Zuweisung des Fanning-Features erfolgt in der Gerätesteuerung, dort wird in diesem Fall nicht mehr ein statischer Helligkeitswert eingetragen, sondern ein „arithmetischer Term“ mit Fanning-Operatoren in textueller Form, z.B. 10 > 90
 
-Damit drückt man aus, dass sich die Helligkeitswerte in der Gruppe zwischen den Werte 10 und 90 gleichmäßig aufteilen. Dabei wird die Reihenfolge der Geräte aus der Gruppendefinition abgeleitet, also ggf. sollte man im Projektexplorer unter Gerätegruppen die Geräte neu sortieren, ansonsten sind Reihenfolgeprobleme möglich.
+Damit drückt man aus, dass sich die Helligkeitswerte in der Gruppe zwischen den Werte 10 und 90 gleichmäßig aufteilen. Dabei wird die Reihenfolge der Geräte aus der Gruppendefinition abgeleitet, also ggf. sollte man im Projektexplorer unter Gerätegruppen die Geräte neu sortieren, ansonsten sind Reihenfolgeprobleme möglich. Andererseits passt sich das Fannng automatsch an, wenn man Geräte zur Gruppe hinzufügt oder löscht.
 
 Die verschiedenen Fanning-Operatoren sind in der nachfolgenden Tabelle dargestellt.
 
 
-.Fanning-Operatoren
+.Fanning-Operatoren (todo: harte Leerzeichen einfügen)
 [width="100%",options="header,footer"]
 [%autowidth]
 |====================
 | Bereich  | Kurzbeschreibung  |  Operatoren 
 | linear | Gleichmäßige zu- oder abnehmende Werte |  <	>       <>	   >< 
-|alternierend |Abwechselnde Werte  |#  ## 
+|alternierend |Abwechselnde Werte  |#    ##
 | symmetrisch  | Spiegelbildliche Aufteilung der Werte  | (senkrechte Balken) 
 | zufällig  | Zufällige Ausgabe von Werten innerhalb des angegeben Wertebereichs  |  ?	??	 
 | gekreuzt  | <zu ergänzen>  |  ~<    ~>       ~<>	  ~>< 
 |====================
 
-Wenn der Fanning-Operator doppelt angegeben wird, wird die Gruppe in zwei Hälften aufgeteilt in denen jeweils das Fanning Muster angewendet wird. Damit erreicht man eine gleichmäßige Aufteilung von der Mitte nach außen.
+Wenn der Fanning-Operator doppelt angegeben wird (also z.B. ## statt #), wird die Gruppe in zwei Hälften aufgeteilt in denen jeweils das Fanning Muster angewendet wird. Damit erreicht man eine gleichmäßige Aufteilung von der Mitte nach außen.
 
 In der folgenden Abbildung erkennt man Fanning
-* beim Dimmer (MSP1…MSP8)
+
+* beim Dimmer/Helligkeit (MSP1…MSP8)
 * in der Farbe (MSP9…MSP16)
 * in der Tilt-Position (DMH1…DMH8)
 
@@ -61,21 +62,25 @@ Stefan: Naja, beim Fading wird die Änderung einer Eigenschaft über den Zeitver
 
 == Audio-Cues
 
+Bei verschiedenen Veranstaltungen wie Weihnachtsshows, Musicals aber auch Karneval wird oft Musik aus der Konserve eingespielt. Das bedeutet eigentlich, dass man die Lichtshow für solche Stücke schon Milli-Sekunden genau vorbereiten kann. Natürlich könnte ein Profi das auch live hinbekommen, aber dazu braucht man musikalisches Talent und Taktgefühl wie z.B. der Schlagzeuger – aber der sitzt ja nun mal während der Show nicht hinter dem Licht-PC.
+
+Jannik weiss, dass man als Cuelist-Trigger für solche Situationen den Timecode einsetzen kann. Man kann sich mittels externer Tools wie z.B. Audacity die Waveform und die exakte Zeit (also den Timecode) für besondere Events anschauen, bei denen man z.B. sekundengenau eine Cueliste starten oder stoppen möchte. 
 
 image:Kap5_Specialcue.jpg[Specialcue]
 
-Abb.:
+Abb.5.x: Einfügen einer Audiocue
+
+Für dieses Konzept gibt es die Specialcues „play“ and „stop“ Audiocue die Jannik zu Beginn und am Ende der Cueliste hinzufügt. Mittels der Timecodes (die man sich vielleicht auf einem Zettel notiert hat), kann man dann über entsprechende Timecode-Trigger in der Cuelist die vorher erstellen Cues zum richtigen Zeitpunkt starten.
 
 image:Kap5_AudioCue.jpg[AudioCue]
 
 Abb.: 5.x: Specialcue „Audio“ in DMXControl 
 
+Auf diese Weise erreicht man, dass die Lichtstimmungen zum entsprechenden Song bei jeder Aufführung absolut gleich sind.
+
 
 == Timecodeplayer
 
-Bei verschiedenen Veranstaltungen wie Weihnachtsshows, Musicals aber auch Karneval wird oft Musik aus der Konserve eingespielt. Das bedeutet eigentlich, dass man die Lichtshow für solche Stücke schon Milli-Sekunden genau vorbereiten kann. Natürlich könnte ein Profi das auch live hinbekommen, aber dazu braucht man musikalisches Talent und Taktgefühl wie z.B. der Schlagzeuger – aber der sitzt ja nun mal während der Show nicht hinter dem Licht-PC.
-
-Jannik weiss, dass man als Cuelist-Trigger für solche Situationen den Timecode einsetzen kann. Man kann sich mittels externer Tools wie z.B. Audacity die Waveform und die exakte Zeit (also den Timecode) für besondere Events anschauen, bei denen man z.B. sekundengenau eine Cueliste starten oder stoppen möchte. Für dieses Konzept gibt es die Specialcues „play“ and „stop“ Audiocue die Jannik zu Beginn und am Ende der Cueliste hinzufügt.
 
 An dieser Stelle hakt Stefan ein und zeigt Jannik den seit DMXControl 3.3 existierenden Timecode-Player. Im Projektexplorer gibt es jetzt den neuen Objekttyp Timecodeshows. Er sagt: Dieses neue Objekt ist kein reiner Audioplayer mehr (wie man ihn aus DMXControl2 kennt), sondern das Teil kann viel mehr. 
 
@@ -95,16 +100,16 @@ image:Kap5_TCP_AudioTrackIcons.JPG[Audiotrack einfügen]
 
 Abb. 5.x: Steuerungsfenster Audiotrack
 
-Im Audiotrack kann Jannik dem Hand-Icon (rechts oben in obiger Abb. 5.x) die Lautstärke einstellen, die anderen Icons werden im Bild erklärt (tbd.).
+Im Audiotrack kann Jannik mit dem Hand-Icon (rechts oben in obiger Abb. 5.x) die Lautstärke einstellen, die anderen Icons werden im Bild erklärt (tbd.).
 
 image:Kap5_TCP_Wasserfall_mehrere.JPG[]
 
 Abb. 5.x: mehrere Audioschnipsel in einem Audiotrack
 
-Nun will Jannik wissen, wie man dies zur Lichtsteuerung nutzt. In DMXControl2 hatte man ja an einzelnen Stellen in der Audiospur „Markierungen“ gesetzt, denen dann jeweils eine Cue zugeordnet wurde. Jetzt ist das Konzept enorm erweitert worden, erklärt Stefan. Es gibt nun 3 Track-Typen in der Timecodeshow: 
+Nun will Jannik wissen, wie man dies zur Lichtsteuerung nutzt. In DMXControl2 hatte man ja an einzelnen Stellen in der Audiospur grafische  „Markierungen“ gesetzt, denen dann jeweils eine Cue zugeordnet wurde. Jetzt ist das Konzept enorm erweitert worden, erklärt Stefan. Es gibt nun 3 Track-Typen in der Timecodeshow: 
 
 * Audio Track – wie gerade besprochen zur Sichtbarmachung der Audiospur
-* Cue list Track(s) – es kann eine oder mehrere geben, in denen die verwendeten Cuelisten wie „Videoschnipsel“ angeordnet werden können
+* Cue list Track(s) – es kann eine oder mehrere davon geben, in denen die verwendeten Cuelisten wie „Videoschnipsel“ angeordnet werden können
 * Executor Track(s) – diese Tracks ermöglichen, Signale und Befehle die man sonst mit Executoren ausführen würde, in die Timecodeshow zu integrieren
 
 image:Kap5_5_TCP_Cuelist_einfügen.JPG[]
@@ -116,11 +121,11 @@ image:Kap5_6_TCP_Cuelist_Synchro.JPG[Synchronisation]
 
 Abb. 5.x: Synchronisation zwischen Cuelist-Editor und Cuelist-Track
 
-Jannik findet beeindruckend, das die Synchronisation Cuelist (in Cuelist Editor)  und Cuelist track im Timecodeplayer in beide Richtungen zwischen Text und Grafik problemlos funktioniert. Ändert er ein einem Tool einen Wert, wird das sofort im anderen Tool aktualisiert.  Jannik will wissen, ob das mit jeder Cueliste funktioniert?
+Jannik findet beeindruckend, das die Synchronisation zwischen Cuelist (in Cuelist Editor) und Cuelist-Track im Timecodeplayer in beide Richtungen zwischen Text und Grafik problemlos funktioniert. Ändert er ein einem Tool einen Wert, wird das sofort im anderen Tool aktualisiert. Jannik will wissen, ob das mit jeder Cueliste funktioniert?
 
 Nein, wirft Stefan ein. Das Konzept der Timecodeshow ist explizit auf Timecodes bzw. Timecode-Trigger zugeschnitten, daher ja auch der Name.  Jede Ausführungszeit ist immer eine Timecode-Marke! Das Konzept würde bei wait, follow, manual-Triggern in der Cueliste gar nicht funktionieren, da diese die Zeitsteuerung durcheinanderbringen würden. Ebenso macht nur der Einmalig-Mode in der Cueliste Sinn – ganz klar, dass der random-Mode in eine Timecode-Show in 99,99% der Fälle nur Chaos anrichten würde. Vielleicht gibt es ja doch einen sinnvollen Anwendungsfall für die 0,01%? Das prüft Jannik später…
 
-Der Timecodeplayer arbeitet jetzt zur Vereinfachung mit dem Timecode auf Millisekundenbasis. (Bei anderen Timecode-Triggern außerhalb der Timecodeshow kann natürlich nach Belieben auch die Frame-Zählung angewendet werden.)
+Der Timecodeplayer arbeitet jetzt zur Vereinfachung mit dem Timecode auf Millisekundenbasis. (Bei anderen Timecode-Triggern außerhalb der Timecodeshow kann natürlich nach Belieben auch weiterhin die Frame-Zählung angewendet werden.)
 
 image:Kap5_7_TCP_Cuelist_mehrere.JPG[]
 

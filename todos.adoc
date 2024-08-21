@@ -21,6 +21,7 @@ NOTE: Diese ToDo-Liste wird später in git issues überführt, in Klammern steht
 * TP02(2): Nummerierung der Kapitel verbessern
 * TP03(1): Nummerierung der Abbildungen korrigieren
 * TP04(2): Inkompatibilität von AsciidocFX und github-Preview beseitigen
+* TP05(1): pdf-Generator ignoriert Images
 
 == Inhaltliche Ergänzungen Add-ons DMXControl
 

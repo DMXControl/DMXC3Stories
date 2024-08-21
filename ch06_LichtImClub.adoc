@@ -79,7 +79,7 @@ Was gibt es da noch so an Events außer den Tastaturevents vom Laptop? will Jann
 
 [width="100%"]
 |====================
-| image:Kap6_Eingangszuweisung01.JPG[] | image:Kap6_InputAssignment.png[] 
+| image:Kap6_Eingangszuweisung01.JPG[] | image:Kap6_InputAssignment.jpg[] 
 |====================
 
 Abb. 6.x: Input Assingment mit Input- und Output-Kategorien
