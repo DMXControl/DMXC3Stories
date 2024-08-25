@@ -203,6 +203,8 @@ _Später ergänzen: Bei Tracking macht Random Mode keinen Sinn._
 
 NOTE: Nochmal der Hinweis: Es kann sehr sinnvoll sein, Cuelists mit nur 1 Cue zu füllen, wenn man diese z.B. mit einem Executor steuern möchte oder Prioritäten zwischen Cue(list)s ausnutzen möchte. 
 
+
+
 === Grundlicht, Oberlicht hell genug?
 
 Wenn irgendjemand auf der Bühne auftritt, solltest Du immer Grundlicht und Oberlicht zur Verfügung haben. 

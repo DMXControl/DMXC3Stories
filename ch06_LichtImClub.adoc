@@ -43,6 +43,19 @@ Eine andere sehr interessante Form ist das Einfügen von existierenden Cuelisten
 
 _Noch zu erklären: HTP, LTP, LoTP_
 
+=== LTP, HTP, (LoTP)
+
+Pro cuelist kann man noch bei Bedarf ein besonderes Verhalten einstellen:
+
+* HTP – Highest value Takes Precedence
+* LTP – Latest value Takes Precedence
+
+Also, HTP und LTP gibt es schon lange. HTP war hauptsächlich für Dimmer auf einem Faderpult gedacht. Der höhere Fader gewinnt. Mit anderen Geräte-Eigenschaften wie z.B. Position, Gobos etc. ergibt es keinen Sinn den höchsten Wert zu nehmen. Hier ist es sinnvoll die letzte Auswahl zu nutzen.
+
+Die Priorität hat mit dem Mischverhalten von HTP / LTP / LoTP nichts zu tun. Da geht es nur darum, wie sich in DMXControl die Cuelists mit unterschiedlichen Prioritäten untereinander verhalten.
+
+https://wiki-de.dmxcontrol-projects.org/index.php?title=HTP-,_LTP-_and_LoTP-Mixing_(Cuelist)_DMXC3[Wiki]
+
 
 
 == Matrizen
@@ -70,11 +83,11 @@ Für weitere Details hilft auf jeden Fall dieser Wiki-Beitrag weiter: https://wi
 
 _< noch im frühen Entwurfsstatus>_
 
-Die Eingangszuweisung (Input Assignment) hatte Jannik schon kennengelernt, als es ihm zu nervig war mit dem Mausklick die Go-Taste der Cuelist zu treffen. Stefan hat erklärt, dass man diese Aktivität z.B. auch mit der Leertaste des Laptops auslösen kann und hat dazu eine Verbindung (connection) im Input Assigment per Drag&Drop hergestellt.
+Die Eingangszuweisung (Input Assignment) hatte Jannik schon kennengelernt, als es ihm zu nervig war mit dem Mausklick die Go-Taste der Cuelist zu treffen. Stefan hat erklärt, dass man diese Aktivität z.B. auch mit der Leertaste des Laptops auslösen kann und hat dazu eine Verbindung (connection) im Input Assigment per Drag&Drop hergestellt. Auch beim Party-Softdesk im Kap. 4 wurde im Prnzip das Input Assignment benutzt um die Buttons mit den Cuelisten zu verbandeln.
 
 Genaugenommen ist damit das Konzept des Input Assignments schon charaktersiert. Man definiert sich beliebige Eingangsgrößen (events) um irgendwelche Aktionen zu triggern.
 
-Was gibt es da noch so an Events außer den Tastaturevents vom Laptop? will Jannik wissen. Die Vielfalt der Antwort überrascht ihn: Das können Signale von externen DMX-Pulten sein oder auch MIDI-Signale und OSL-Signale, z.B. aus dem DJ-Bereich. Ebenso können Taktsignale (Beattrigger, Timecodes, Frequenzsignale) zum Starten von Aktivitäten verwendet werden. Es gibt auch „interne“ Signale von DMXControl wie vom Speedmaster, Audioanalyser oder anderen Plugins die man vorteilhaft zum Triggern von Cuelisten verwenden kann. Die verschiedenen Kategorien sind in der folgenden Abbildung beispielhaft sichtbar:
+Was gibt es da noch so an Events außer den Tastaturevents vom Laptop? will Jannik wissen. Die Vielfalt von Stefans Antwort überrascht ihn: Das können Signale von externen DMX-Pulten sein oder auch MIDI-Signale und OSL-Signale, z.B. aus dem DJ-Bereich. Ebenso können Taktsignale (Beattrigger, Timecodes, Frequenzsignale) zum Starten von Aktivitäten verwendet werden. Es gibt auch „interne“ Signale von DMXControl wie vom Speedmaster, Audioanalyser oder anderen Plugins die man vorteilhaft zum Triggern von Cuelisten verwenden kann. Die verschiedenen Kategorien sind in der folgenden Abbildung beispielhaft sichtbar:
 
 
 [width="100%"]
@@ -84,15 +97,19 @@ Was gibt es da noch so an Events außer den Tastaturevents vom Laptop? will Jann
 
 Abb. 6.x: Input Assingment mit Input- und Output-Kategorien
 
-Stefan erklärt, dass selbst exotische Events wie Elektrizitäts-Overload oder Drücken des Blackout-Taste zu Events führe können. In den Abbildungen fehlen Softdesks oder Timecodeshows, die dann sichtbar werden wenn es entsprechende Objekte davon im Projektexplorer geben sollte.
+Stefan erklärt, dass selbst exotische Events wie Elektrizitäts-Overload oder Drücken des Blackout-Taste zu Events führen können. In den Abbildungen fehlen Softdesks oder Timecodeshows, die dann sichtbar werden wenn es entsprechende Objekte davon im Projektexplorer geben sollte.
 
 Auf der anderen Seite gibt es auf der „Ausgangsseite“, also das was beeinflusst werden soll nicht nur die Cuelisten, sondern auch DMX-Out-Signale oder Master-/Executor-Operationen.
 
 Stefan erklärt, dass damit eine wahnsinnige Flexibilität innerhalb von DMXControl zur Showsteuerung erreicht werden kann. Besonders interessant ist das Input Assignment für die Programmierung der Operation des Softdesks, dazu mehr im folgenden Kapitel.
 
-Nicht immer ist das Input Assignment darauf beschränkt, eine Eingangsgröße einer Ausgangsgröße zuzuweisen. Manchmal möchte man eine Rückmeldung bekommen (z.B. am Softdesk), manchmal muss man die Werte umwandeln bevor sie verarbeitet werden können oder manchmal möchte man eine bestimmte Logik implementieren, wo es Abhängigkeiten oder Zusammenhänge zwischen verschiedenen Signalen geben kann. Stefan sagt: Damit dies nicht in einer Art Programmiersprache ausartet, hat sich das Entwicklerteam für eine grafische „Programmierung“ entschlossen, so wie man sie vielleicht aus anderen Tools wie Node-Red oder vvvv kennt. Die Logik besteht dabei immer aus einer Vielzahl miteinander verbundener Knoten. Jeder Knoten hat auf der rechten Seite Pins für Ausgangssignale und auf der linken Seite Pins für Eingangssignale. Ein Ausgangspin kann potentiell mit einem Eingangspin über eine Linie verbunden werden, so wie wir das bereits bei der Go-Connection gesehen hatten. Natürlich kann ein Ausgangssignal auch Input für verschiedene Eingänge sein, nur man muss immer auf den Typ der Signale achten. 
+Nicht immer ist das Input Assignment darauf beschränkt, eine Eingangsgröße einer Ausgangsgröße zuzuweisen. Manchmal möchte man eine Rückmeldung bekommen (z.B. am Softdesk). Das schließt nicht nur das Ändern des Status eines Buttons ein, ob dieser gedrückt oder nicht gedrückt ist, sondern man kann sich auch Informationen auf Textbasis wie den Namen einer aktuell aktiven Szenenliste oder die BPM-Werte aller im Projekt genutzten Speedmaster anzeigen lassen.
+Manchmal muss man die Werte umwandeln bevor sie verarbeitet werden können oder manchmal möchte man eine bestimmte Logik implementieren, wo es Abhängigkeiten oder Zusammenhänge zwischen verschiedenen Signalen geben kann.
 
-Die Menge der Eingangspins auf der linken Seite wird auch Eingangs-Hub (Input Hub, auch port) genannt, entsprechend gibt es auch den Ausgangs-Hub (Output Hub) auf der rechten Seite. Es können auch jeweils nur Ausgangs-Hubs mit Input-Hubs verbunden werden.
+Stefan sagt: Damit dies nicht in einer Art Programmiersprache ausartet, hat sich das Entwicklerteam für eine grafische „Programmierung“ entschlossen, so wie man sie vielleicht aus anderen Tools wie Node-Red oder vvvv kennt. Die Logik besteht dabei immer aus einer Vielzahl miteinander verbundener Knoten. Jeder Knoten hat auf der rechten Seite Pins für Ausgangssignale und auf der linken Seite Pins für Eingangssignale. Ein Ausgangspin kann potentiell mit einem Eingangspin über eine Linie verbunden werden, so wie wir das bereits bei der Go-Connection gesehen hatten. Natürlich kann ein Ausgangssignal auch Input für verschiedene Eingänge sein, nur man muss immer auf den Typ der Signale achten. 
+
+Die Menge der Eingangspins auf der linken Seite wird auch Eingangs-Hub (Input Hub, auch port) genannt, entsprechend gibt es auch den Ausgangs-Hub (Output Hub) auf der rechten Seite. Es können auch jeweils nur Ausgangs-Hubs mit Input-Hubs verbunden werden. Der Modul „Eingänge zuweisen“ (Input Assignment) ist also die zentrale Schnittstelle in DMXControl, um beliebige Eingabegeräte zu bedienen und Signale zu verteilen.
+
 
 
 [width="100%"]
@@ -119,15 +136,24 @@ Abb. 6.x: Grafische Knotenansicht im Input Assignment
 
 Wenn man eine sehr große Anzahl von Connections hat, können diese ähnlich zu Executoren in Bänken organisiert werden. So kann man logisch zusammenhängende Connections in einer Bank zusammenfassen um eine bessere Übersicht zu behalten. Auch ganze Bänke können gezielt ein- und ausgeschaltet werden.
 
+NOTE:Eingangs-Hub (Input Hub, auch port) sind immer auf der linken Seite und Ausgangs-Hub (Output Hub) auf der rechten Seite. Es können jeweils nur Ausgangs-Hubs mit Input-Hubs verbunden werden
+
+
 Es gibt verschiede Kategorien von Nodes:
+
 * Converter (Typwandlung) Farben, Bitmaps, Color to RGB, HSV to Color, Beat to Bool, Framat
 * Logic (Math. und Logikfunktionen, Gatter) FlipFlop, UND, OR, Math, Expression, Timer, Delay, Counter, Compare, BinarySwitcher
 * Wrapper (Informationen über Objekte wie Cues, Devices, Steuern der Objekte)
 * Value Object (erstellt Matrix)
 * Logging (erstellt csv-Datei von Werten)
 
+Generell können Parameter über das Eigenschaftsmenü der Nodes gesetzt werden.
+
+
 Detaillierte Informationen gibt es hier:
 https://wiki-de.dmxcontrol-projects.org/index.php?title=Cuelist_(Input_Assignment)_DMXC3
+
+
 
 
 == Fit for Softdesk
@@ -135,5 +161,6 @@ https://wiki-de.dmxcontrol-projects.org/index.php?title=Cuelist_(Input_Assignmen
 _.. zu ergänzen…_
 
 Hier werden „sophisticated“ Features vorgestellt im Zusammenhang mit dem Input Assignment, inkl. Rückmeldungen usw.
+
 * Neben dem Ansprechen von programminternen Funktionen Szenenlisten, Executoren, Master etc. bietet das Eingänge zuweisen auch die Möglichkeit, die verschiedensten Informationen zum Beispiel im Softdesk zu visualisieren
 * Das schließt nicht nur das Ändern des Status eines Buttons ein, ob dieser gedrückt oder nicht gedrückt ist, sondern man kann sich auch Informationen auf Textbasis wie den Namen einer aktuell aktiven Szenenliste oder die BPM-Werte aller im Projekt genutzten Speedmaster anzeigen lassen

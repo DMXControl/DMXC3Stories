@@ -1,4 +1,4 @@
-:imagesdir: ./images/Allg/
+
 
 
 = DMXControl 3 Stories
@@ -9,7 +9,7 @@ dmxcontrol-projects.org
 :lang: de
 :toc: left
 :numbered:
-
+:imagesdir: ./images/Allg/
 
 
 [%hardbreaks]
@@ -33,4 +33,3 @@ http://dmxcontrol.de[Software Download]
 
 image:DMXControl-Projects_e.V._Logo.png[DMXControlLogo,200,200,float="right",align="center"]
 
-<<<

@@ -87,5 +87,38 @@ Und vergessen Sie nicht die Möglichkeit, mit Cues zu arbeiten, die in einer Sch
 
 == Softdesk - der Start
 
+Janas Geburtstagsparty soll eine Party sein, da wollen weder Jannik noch Jana ständig hinter einem Laptop sitzen und das Licht steuern. Eine wunderbare Möglichkeit zur Vereinfachung der Steuerung ist das Softpult (welches auch das Input Assignment voraussetzt). Beides wird in spätere Kapiteln viel ausführlicher besprochen, hier wird nun ein simples Einstiegsszenario vorgestellt.
+
+Ein Softpult ist ein virtuelles Abbild eines Hardware-Pultes. Besonders vorteilhaft nutzt man es mit einem Touchscreen, aber natürlich funktioniert die Bedienung per Maus aus. Am Anfang begnügen wir uns mit einigen Buttons und Reglern. Richtig programmiert kann so ein Softpult die alleinige Oberfläche der Steuerung des Partylichtes sein. Alle anderen Fenster von DMXControl 3 werden nicht mehr gebraucht. Somit können Jana oder Jannik einfach mal in einer ruhigen Minute an das Softpult gehen, einige Knöpfe drücken - und schon sind ganz andere Lichtstimmungen da.
+
+<Bild Partysoftpult einfügen>
+
+
+Nun startet Jannik mit dem Bau des ersten Softpults. Dazu muss der *Design Modus* gewählt werden. Die Auswahl der Buttuns und Regler sollte selbsterklärend sein. Die Elemente kann man beliebig platzieren, eine automatische Ausrichtung der Elemente wird ebenfalls unterstützt. Zu jedem Element gibt es ein Eigenschaften-Menü, welche beim Anklicken des Elementes die aktuellen Werte zeigt. Hier kann Jannik Farben, Anzeigenamen und Beschriftungen beliebig ändern.
+Die Beschreibung der einzelnen Darstellungs- und Eingabeelemente findet man im
+
+*Wiki:* Softdesk_DMXC3
+
+image:Kap4_DesignModeSoftpult.jpg[]
+
+Abb. 4-3: Design Mode vom Softdesk
+
+Stefan schlägt vor, Details des Input Assignments wie die verschiedenen Nodes erstmal zu ignorieren. Wir verwenden es nur in der Explorer-artigen Form, wo es jeweils eine Zuordnung zwischen zwei Obkten per Drag&Drop gibt. 
+
+Jannik erkennt schnell, dass es zu jedem Element vom Softdesk einen Eintrag gibt. Diesen kann man dann den Einträgen der Cuelisten zuordnen. "Oha - also wenn ich eine Cuelist per Button starten will, muss ich also diesen Button dem Start-Befehl zuordnen. Alles klar!"
+
+Mit jeder Zuordnung erscheint eine neue Zeile in der Input-Assigment-Tabelle. Dort kann Jannik evtl. fehlerhafte Einträge sofort löschen. Mehr Details zum Input Assignment gibt es dann im Kapitel 7.
+
+
+Im Live-Betrieb wird das Softdesk dann im normalen Modus aufgerufen und bedient. 
+
+Auch für das Softdesk werden in späteren Kapiteln viele interessante konkrete Anwendungsfälle dargestellt. Als Ausblick sei hier mal ein komplexes Softpult von einem Nutzer aus dem Forum dargestellt. Durch die Beschriftung der Elemente und der Bereiche im Softpult sollte die Funktion halbwegs klar sein.
+
+image:Kap4_SoftDeskKomplex.jpg[]
+
+Abb. 4-4: Ausblick Softdesk (Quelle: DMXControl-Forum)
+
 _<to do: Einfache Konzepte Softdesk bescheiben, wo noch keine tiefe Kenntnis über das Input Assignment erforderlich ist. z.B. 
 (Toggle)Button ansteuern_
+
+
